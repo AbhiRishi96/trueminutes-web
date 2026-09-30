@@ -1,0 +1,27 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# next
+.next
+out
+dist
+dist-ssr
+
+# env
+.env
+.env*.local
+*.local
+
+# debug / OS
+npm-debug.log*
+.DS_Store
+*.pem
+
+# typescript
+next-env.d.ts
+*.tsbuildinfo
+
+# graphify
+graphify-out/.graphify_*

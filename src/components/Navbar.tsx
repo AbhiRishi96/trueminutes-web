@@ -1,202 +1,88 @@
-import React, { useState, useEffect } from 'react';
-import { DmgDownloadButton } from './DmgDownloadButton';
+"use client";
 
-export const Navbar: React.FC = () => {
+import Link from "next/link";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
+import { NAV_LINKS, SITE } from "@/lib/site";
+import { DownloadButton } from "@/components/DownloadButton";
+
+export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <header
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: 50,
-        width: '100%',
-        transition: 'all 0.3s ease',
-        background: scrolled ? 'rgba(9, 10, 12, 0.85)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(16px)' : 'none',
-        borderBottom: scrolled ? '1px solid var(--border-subtle)' : '1px solid transparent',
-        padding: scrolled ? '12px 0' : '20px 0',
-      }}
+      className={`sticky top-0 z-50 transition-colors duration-300 ${
+        scrolled ? "glass border-b border-border" : "bg-transparent"
+      }`}
     >
-      <div
-        style={{
-          maxWidth: '1240px',
-          margin: '0 auto',
-          padding: '0 24px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        {/* Brand Logo & Name */}
-        <a
-          href="#"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '12px',
-            textDecoration: 'none',
-            color: 'inherit',
-          }}
-        >
-          <img
-            src="/brand/app-icon.png"
-            alt="TrueMinutes Logo"
-            style={{
-              width: '36px',
-              height: '36px',
-              borderRadius: '9px',
-              boxShadow: '0 0 15px rgba(99, 102, 241, 0.4)',
-            }}
-          />
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span
-              style={{
-                fontSize: '1.2rem',
-                fontWeight: 700,
-                letterSpacing: '-0.02em',
-                color: 'var(--text-bright)',
-              }}
-            >
-              TrueMinutes
-            </span>
-            <span
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '5px',
-                padding: '2px 8px',
-                borderRadius: '9999px',
-                fontSize: '0.7rem',
-                fontWeight: 600,
-                backgroundColor: 'rgba(16, 185, 129, 0.12)',
-                color: 'var(--accent-emerald)',
-                border: '1px solid var(--border-emerald)',
-              }}
-            >
-              <span className="pulse-dot" style={{ width: '6px', height: '6px' }}></span>
-              0 BOTS
-            </span>
-          </div>
-        </a>
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+        <Link href="/" className="flex items-center gap-2.5 no-underline">
+          <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-violet to-violet-soft shadow-[0_0_24px_rgba(124,92,252,0.35)]">
+            <Image src="/brand/app-icon.png" alt="" width={32} height={32} className="object-cover" />
+          </span>
+          <span className="text-[0.95rem] font-bold tracking-tight text-white">{SITE.name}</span>
+          <span className="hidden items-center gap-1.5 rounded-full border border-emerald/25 bg-emerald-dim px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider text-emerald sm:inline-flex">
+            <span className="pulse-dot" />
+            Bot-free
+          </span>
+        </Link>
 
-        {/* Desktop Nav Links */}
-        <nav
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '32px',
-          }}
-          className="desktop-nav"
-        >
-          <a
-            href="#experience"
-            style={{
-              fontSize: '0.9rem',
-              fontWeight: 500,
-              color: 'var(--text-muted)',
-              textDecoration: 'none',
-              transition: 'color 0.2s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-          >
-            How it Works
-          </a>
-          <a
-            href="#why-no-bots"
-            style={{
-              fontSize: '0.9rem',
-              fontWeight: 500,
-              color: 'var(--text-muted)',
-              textDecoration: 'none',
-              transition: 'color 0.2s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-          >
-            Why Bot-Free?
-          </a>
-          <a
-            href="#features"
-            style={{
-              fontSize: '0.9rem',
-              fontWeight: 500,
-              color: 'var(--text-muted)',
-              textDecoration: 'none',
-              transition: 'color 0.2s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-          >
-            Features
-          </a>
-          <a
-            href="#privacy"
-            style={{
-              fontSize: '0.9rem',
-              fontWeight: 500,
-              color: 'var(--text-muted)',
-              textDecoration: 'none',
-              transition: 'color 0.2s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-          >
-            Privacy
-          </a>
-          <a
-            href="#faq"
-            style={{
-              fontSize: '0.9rem',
-              fontWeight: 500,
-              color: 'var(--text-muted)',
-              textDecoration: 'none',
-              transition: 'color 0.2s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
-          >
-            FAQ
-          </a>
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-white/5 hover:text-text"
+            >
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
-        {/* Right CTA / GitHub */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <a
-            href="https://github.com/AbhiRishi96/TrueMinutes"
-            target="_blank"
-            rel="noopener noreferrer"
-            title="View on GitHub"
-            style={{
-              color: 'var(--text-muted)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '6px',
-              borderRadius: '8px',
-              textDecoration: 'none',
-              transition: 'color 0.2s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+        <div className="flex items-center gap-2">
+          <div className="hidden sm:block">
+            <DownloadButton variant="nav" />
+          </div>
+          <button
+            type="button"
+            className="inline-flex rounded-lg p-2 text-muted hover:bg-white/5 hover:text-text md:hidden"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-            </svg>
-          </a>
-          <DmgDownloadButton variant="nav" />
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
       </div>
+
+      {open && (
+        <div className="border-t border-border bg-canvas/95 px-5 py-4 md:hidden">
+          <div className="flex flex-col gap-1">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="rounded-lg px-3 py-3 text-base font-medium text-muted hover:bg-white/5 hover:text-text"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div className="pt-3">
+              <DownloadButton variant="primary" className="w-full justify-center" />
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
-};
+}

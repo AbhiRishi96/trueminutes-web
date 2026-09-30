@@ -12,7 +12,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -20,28 +20,28 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "glass border-b border-border" : "bg-transparent"
+      className={`sticky top-0 z-50 transition-[background,border] duration-300 ${
+        scrolled ? "glass border-b border-border" : "border-b border-transparent bg-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-        <Link href="/" className="flex items-center gap-2.5 no-underline">
-          <span className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-violet to-violet-soft shadow-[0_0_24px_rgba(124,92,252,0.35)]">
-            <Image src="/brand/app-icon.png" alt="" width={32} height={32} className="object-cover" />
-          </span>
-          <span className="text-[0.95rem] font-bold tracking-tight text-white">{SITE.name}</span>
-          <span className="hidden items-center gap-1.5 rounded-full border border-emerald/25 bg-emerald-dim px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider text-emerald sm:inline-flex">
-            <span className="pulse-dot" />
-            Bot-free
-          </span>
+      <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-5 lg:h-16">
+        <Link href="/" className="flex shrink-0 items-center gap-2.5 no-underline">
+          <Image
+            src="/brand/app-icon.png"
+            alt=""
+            width={28}
+            height={28}
+            className="rounded-[7px]"
+          />
+          <span className="text-[0.95rem] font-semibold tracking-tight text-white">{SITE.name}</span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">
+        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-0.5 md:flex" aria-label="Primary">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-lg px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-white/5 hover:text-text"
+              className="rounded-md px-3 py-1.5 text-[0.8125rem] font-medium text-muted transition-colors hover:text-text"
             >
               {link.label}
             </Link>
@@ -49,23 +49,31 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <a
+            href={SITE.releases}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden text-[0.8125rem] font-medium text-muted no-underline transition-colors hover:text-text sm:inline"
+          >
+            Releases
+          </a>
           <div className="hidden sm:block">
             <DownloadButton variant="nav" />
           </div>
           <button
             type="button"
-            className="inline-flex rounded-lg p-2 text-muted hover:bg-white/5 hover:text-text md:hidden"
+            className="inline-flex rounded-md p-2 text-muted hover:bg-white/5 hover:text-text md:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
+            {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
 
       {open && (
-        <div className="border-t border-border bg-canvas/95 px-5 py-4 md:hidden">
+        <div className="border-t border-border bg-canvas/98 px-5 py-4 md:hidden">
           <div className="flex flex-col gap-1">
             {NAV_LINKS.map((link) => (
               <Link

@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  --color-canvas: #0b0b12;
-  --color-surface: #11111b;
-  --color-surface-2: #181824;
-  --color-surface-3: #1e1e2e;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-strong: rgba(255, 255, 255, 0.14);
-  --color-violet: #6366f1;
-  --color-violet-soft: #818cf8;
-  --color-violet-dim: rgba(99, 102, 241, 0.16);
-  --color-emerald: #34d399;
-  --color-emerald-dim: rgba(52, 211, 153, 0.14);
-  --color-cyan: #38bdf8;
-  --color-peach: #fb923c;
-  --color-text: #f8fafc;
-  --color-muted: #94a3b8;
-  --color-dim: #64748b;
+  --color-canvas: #05070c;
+  --color-surface: #0c1018;
+  --color-surface-2: #121821;
+  --color-surface-3: #1a222e;
+  --color-border: rgba(255, 255, 255, 0.07);
+  --color-border-strong: rgba(255, 255, 255, 0.12);
+  --color-violet: #6e7bf2;
+  --color-violet-soft: #9aa5ff;
+  --color-violet-dim: rgba(110, 123, 242, 0.12);
+  --color-emerald: #3ecf8e;
+  --color-emerald-dim: rgba(62, 207, 142, 0.12);
+  --color-cyan: #5ec8f0;
+  --color-text: #f4f6fb;
+  --color-muted: #9aa3b5;
+  --color-dim: #6b7385;
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --tracking-display: -0.045em;
 }
 
 @layer base {
@@ -44,88 +44,75 @@
   body {
     @apply bg-canvas text-text font-sans antialiased;
     background-image:
-      radial-gradient(ellipse 90% 55% at 15% -15%, rgba(99, 102, 241, 0.22), transparent 55%),
-      radial-gradient(ellipse 70% 45% at 95% 5%, rgba(56, 189, 248, 0.12), transparent 50%),
-      radial-gradient(ellipse 55% 35% at 50% 105%, rgba(167, 139, 250, 0.1), transparent 55%);
-    background-attachment: fixed;
+      radial-gradient(ellipse 70% 40% at 50% -20%, rgba(110, 123, 242, 0.16), transparent 60%),
+      radial-gradient(ellipse 40% 30% at 100% 0%, rgba(94, 200, 240, 0.06), transparent 50%);
     min-height: 100vh;
   }
 
   ::selection {
-    background: rgba(99, 102, 241, 0.4);
+    background: rgba(110, 123, 242, 0.35);
   }
 }
 
 @layer utilities {
   .glass {
-    background: rgba(17, 17, 27, 0.75);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    background: rgba(12, 16, 24, 0.8);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
     border: 1px solid var(--color-border);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #fff 0%, #a5b4fc 45%, #38bdf8 100%);
+    background: linear-gradient(105deg, #ffffff 10%, #c5cbf8 55%, #7b8cff 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
   .text-gradient-violet {
-    background: linear-gradient(120deg, #c4b5fd 0%, #818cf8 40%, #38bdf8 100%);
+    background: linear-gradient(105deg, #d4d8ff 0%, #8b96f8 50%, #5ec8f0 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
 
-  .shine-border {
-    position: relative;
-  }
-
-  .shine-border::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.22), rgba(99, 102, 241, 0.35), rgba(56, 189, 248, 0.15));
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
+  .product-frame {
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #0a0e14;
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.4),
+      0 40px 80px -24px rgba(0, 0, 0, 0.85),
+      0 0 60px -30px rgba(110, 123, 242, 0.35);
   }
 
   .animate-fade-up {
-    animation: fade-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
   }
 
   .animate-fade-up-delay {
-    animation: fade-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
   }
 
   .animate-fade-up-delay-2 {
-    animation: fade-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
   }
 
   .pulse-dot {
-    width: 7px;
-    height: 7px;
+    width: 6px;
+    height: 6px;
     border-radius: 9999px;
     background: var(--color-emerald);
-    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5);
-    animation: pulse-ring 2s ease-out infinite;
+    box-shadow: 0 0 0 0 rgba(62, 207, 142, 0.45);
+    animation: pulse-ring 2.2s ease-out infinite;
   }
 }
 
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -135,22 +122,12 @@
 
 @keyframes pulse-ring {
   0% {
-    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5);
+    box-shadow: 0 0 0 0 rgba(62, 207, 142, 0.45);
   }
   70% {
-    box-shadow: 0 0 0 10px rgba(52, 211, 153, 0);
+    box-shadow: 0 0 0 8px rgba(62, 207, 142, 0);
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
-  }
-}
-
-@keyframes waveform {
-  0%,
-  100% {
-    transform: scaleY(0.35);
-  }
-  50% {
-    transform: scaleY(1);
+    box-shadow: 0 0 0 0 rgba(62, 207, 142, 0);
   }
 }

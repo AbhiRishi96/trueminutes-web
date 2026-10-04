@@ -60,3 +60,13 @@ Deployed to [the existing staging website](https://trueminutes-website.trueminut
 - Final deployed screenshots and machine-readable checks are saved under ignored `artifacts/website-qa/`. These screenshots contain only fictional demo data. Original private before screenshots remain local and are not deliverables.
 
 All six journey steps now pass the inspected content, navigation, and responsive checks. This is not a claim of complete accessibility compliance, measured conversion improvement, native app qualification, or legal approval.
+
+## Release automation follow-up
+
+Published release automation and the reviewed website source in `d2282fdb00d7d6669d12e022a551c0814f7a81a0`. Deployed the release-aware site locally with the existing Wrangler login as Cloudflare version `d47dd718-0aa0-4da3-8a70-b809c728597d`. Live checks pass six exact-build pages and 26 assets, including generated `/release.json`. A subsequent probe reports `changed=false`.
+
+The latest stable official release selects the version and DMG automatically at build time. The DMG is streamed and verified against GitHub's declared size and SHA-256 digest. Asset IDs/digests detect replacement builds under the same app version. Incomplete, prerelease, mismatched, or untrusted assets fail closed. Four focused Node tests, production build, type checking, static output, and pre-deploy release verification pass. Signing evidence applies only to the exact verified 0.8.4 asset; future assets receive unverified-status guidance rather than inheriting a stale claim.
+
+GitHub workflow checks run twice per hour, with manual/push and optional repository-dispatch triggers. [The unchanged-release dispatch run](https://github.com/AbhiRishi96/trueminutes-web/actions/runs/37178481867) passed and skipped deployment. [The initial push run](https://github.com/AbhiRishi96/trueminutes-web/actions/runs/37178439944) passed release tests/comparison and failed explicitly at the missing `CLOUDFLARE_API_TOKEN` gate. Unattended cloud deployment remains blocked until the owner configures that repository secret; no local OAuth credential was transferred to GitHub. README documents setup, schedule limits, and domain migration variables.
+
+No native release workflow, app code, OAuth Worker, database, or domain was changed. Existing unrelated local helper/component changes remain uncommitted.

@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "repository": "AbhiRishi96/TrueMinutes-releases",
+  "releaseId": 402684659,
+  "version": "0.8.4",
+  "tag": "v0.8.4",
+  "publishedAt": "2026-10-03T20:43:26Z",
+  "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.4",
+  "assetId": 608506274,
+  "assetUpdatedAt": "2026-10-03T20:43:26Z",
+  "assetSize": 25791643,
+  "assetDigest": "sha256:34b60fb4cac1d6ab341cc2e16043cd4198bb9e09c73b65aa3cfb01c5b2afbbb0",
+  "downloadUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/download/v0.8.4/TrueMinutes-0.8.4.dmg",
+  "signing": "internal",
+  "notarized": false
+}

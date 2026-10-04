@@ -4,10 +4,18 @@
   "private": true,
   "description": "TrueMinutes — Bot-free meeting intelligence for macOS",
   "scripts": {
+    "prebuild": "node scripts/sync-release.mjs",
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "next build && node scripts/prepare-static.mjs",
+    "start": "WRANGLER_SEND_METRICS=false wrangler dev --port 3011 --inspector-port 9231",
+    "deploy:dry": "WRANGLER_SEND_METRICS=false wrangler deploy --dry-run",
+    "deploy": "npm run build && npm run typecheck && npm run check:static && WRANGLER_SEND_METRICS=false wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "check:static": "node scripts/check-static.mjs",
+    "test:release": "node --test scripts/release-contract.test.mjs",
+    "release:probe": "node scripts/sync-release.mjs probe",
+    "release:verify": "node scripts/sync-release.mjs verify",
+    "check:live": "node scripts/check-live.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.544.0",
@@ -21,6 +29,10 @@
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
     "tailwindcss": "^4.1.13",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "wrangler": "4.147.0"
+  },
+  "overrides": {
+    "postcss": "8.5.28"
   }
 }

@@ -1,81 +1,126 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/Section";
 import { DownloadButton } from "@/components/DownloadButton";
-import { SITE } from "@/lib/site";
+import { SITE, INSTALL } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "FAQ",
-  description: "Frequently asked questions about TrueMinutes meeting capture and privacy.",
+  title: "Frequently asked questions",
+  description:
+    "Price, privacy, compatible Macs, local AI, meeting capture, and first-install questions about TrueMinutes.",
+  alternates: { canonical: "/faq/" },
 };
-
-const FAQS = [
+const GROUPS = [
   {
-    q: "Will other participants see TrueMinutes in the call?",
-    a: "No. TrueMinutes never joins as a participant. It captures from your Mac using verified meeting surfaces and ScreenCaptureKit scopes.",
+    title: "Getting started",
+    items: [
+      {
+        q: "Is TrueMinutes free?",
+        a: "Yes. The current Mac release is free to download. Local AI runs on your own hardware. Optional cloud providers may charge you for usage; those costs are separate.",
+      },
+      {
+        q: "Which Macs can run it?",
+        a: `Apple silicon Macs (M1 or later) running ${SITE.macosMin}. The standard local summary model requires 16 GB RAM and about 9.5 GB of free disk space for installation. Model requirements vary. Intel Mac, Windows, and Linux installers are not currently offered.`,
+      },
+      {
+        q: "Why does macOS warn when I first open it?",
+        a: INSTALL.description,
+      },
+      {
+        q: "Can I use it offline?",
+        a: "Local transcription, summaries, and Ask can work offline once models are downloaded. The installer, model downloads, updates, Google Calendar, Drive sync, cloud AI, and external exports need internet access.",
+      },
+    ],
   },
   {
-    q: "Which meeting apps are supported?",
-    a: `${SITE.platforms.join(", ")} — across trusted browser/PWA and native client surfaces that pass the live support matrix. Unknown provider UI fails closed.`,
+    title: "Recording meetings",
+    items: [
+      {
+        q: "Will TrueMinutes join as a participant?",
+        a: "No. Capture happens on your Mac. TrueMinutes does not add a bot to the participant list. You still need to inform participants and follow recording policies.",
+      },
+      {
+        q: "Which meeting apps does it detect?",
+        a: `The app includes detection for ${SITE.platforms.join(", ")} on recognized browser, PWA, and native surfaces. Detection depends on visible call controls, permissions, and the client version. Not every surface is release-qualified; unrecognized UI does not start recording.`,
+      },
+      {
+        q: "Does it record every browser tab?",
+        a: "Browser audio capture is scoped to the selected browser application and can include other tabs playing audio. It is not exact-tab capture. Native client capture is scoped to the selected meeting application.",
+      },
+      {
+        q: "Will a calendar event start a recording automatically?",
+        a: "No. A calendar event can prompt you to Start or Skip. Capture requires verified joined-call controls. A recurring-series rule is an explicit opt-in and still waits for verified join; browser calls also need fresh audio scope authorization.",
+      },
+      {
+        q: "How does microphone recording work?",
+        a: "A separate microphone track follows verified meeting mute state by default. Muted, unknown, or stale state leaves the mic off. Any explicit microphone policy override is visible and reversible.",
+      },
+    ],
   },
   {
-    q: "Does it record computer audio and my microphone?",
-    a: "Yes, when you start capture: application-scoped system audio from the meeting surface, plus a separate microphone adapter that follows verified mute state (off when mute is unknown or stale).",
-  },
-  {
-    q: "Do I need host permission to record?",
-    a: "You do not need host permission to admit a bot — there is no bot. You still must follow your company policy and local law regarding recording conversations.",
-  },
-  {
-    q: "Where is audio stored, and for how long?",
-    a: "Raw audio stays on your Mac and is retained for about seven days, with pruning while the app is open. Current storage is not application-encrypted — use FileVault.",
-  },
-  {
-    q: "Is processing fully local?",
-    a: "Default path is local-first (WhisperKit + local summarization options). Cloud ASR/summary requires explicit opt-in in Settings.",
-  },
-  {
-    q: "What is Ask TrueMinutes?",
-    a: "Private Q&A over your captured transcripts. Scope to all meetings, a folder, or one recording. Answers cite sources; threads export to Markdown or PDF. Default path is on-device.",
-  },
-  {
-    q: "Can I export notes to Notion, Markdown, or Slack?",
-    a: "Yes — clipboard (summary, MOM, full report, transcript), PDF, Notion pages, and Slack webhooks. Menu bar can quick-export the last transcript.",
-  },
-  {
-    q: "Why does macOS warn on first open?",
-    a: `The ${SITE.version} build is internally signed and not Apple notarized. Use the DMG install instructions (Open Anyway) rather than unofficial quarantine bypass scripts.`,
-  },
-  {
-    q: "Is Windows available?",
-    a: "Not yet as a shipping installer. Cross-platform work is in progress; macOS Apple Silicon is the supported product today.",
+    title: "Notes, AI & privacy",
+    items: [
+      {
+        q: "Are summaries ready the moment the call ends?",
+        a: "Processing continues in the background after capture stops. Timing depends on the recording, selected models, and your Mac. The library shows processing status and whether recovery needs attention. Review AI-generated notes for accuracy.",
+      },
+      {
+        q: "What can I ask my meetings?",
+        a: "Ask about decisions, owners, next steps, and context from captured transcripts. Scope questions to a meeting, folder, or library. Answers reference source meetings, and threads can export to Markdown or PDF. AI can make mistakes; check the sources.",
+      },
+      {
+        q: "Can I keep processing on my Mac?",
+        a: "Yes. WhisperKit transcribes locally, and local models handle summaries and Ask. Cloud processing stays optional. If enabled, the selected provider receives audio or text required for the operation.",
+      },
+      {
+        q: "What does Drive sync upload?",
+        a: "Optional sync encrypts meetings, transcripts, summaries, Ask chats, folders, and rules on your Mac before upload to Google Drive’s private app data folder. Audio recordings are excluded. Disconnecting stops future sync but does not automatically delete stored data.",
+      },
+      {
+        q: "Is the local database encrypted?",
+        a: "Not by the application. Local audio and the meeting database rely on your Mac’s protections. Use FileVault and secure account access. Encrypted Drive sync is a separate protection for synced data.",
+      },
+      {
+        q: "How do I share the notes?",
+        a: "Copy summaries, Minutes of Meeting, Markdown reports, or transcripts; export meeting PDFs and Ask threads. Notion and Slack exports are available after configuring the destination. Share only what you intend recipients to receive.",
+      },
+    ],
   },
 ];
-
 export default function FaqPage() {
   return (
     <>
       <PageHero
-        eyebrow="FAQ"
-        title="Answers before you download"
-        description="Straight questions about bots, privacy, platforms, and install."
+        eyebrow="A LITTLE CLARITY BEFORE YOU START"
+        title="Good questions. Plain answers."
+        description="What you need, how recording works, and where your data goes."
       />
-
-      <div className="mx-auto flex max-w-2xl flex-col gap-3 px-5 pb-16">
-        {FAQS.map((f) => (
-          <details
-            key={f.q}
-            className="rounded-xl border border-border bg-surface open:border-border-strong"
-          >
-            <summary className="cursor-pointer list-none px-5 py-4 text-left text-base font-semibold text-white [&::-webkit-details-marker]:hidden">
-              {f.q}
-            </summary>
-            <p className="border-t border-border px-5 py-4 text-sm leading-relaxed text-muted">{f.a}</p>
-          </details>
+      <div className="mx-auto max-w-3xl px-5 pb-20">
+        {GROUPS.map((group) => (
+          <section key={group.title} className="mb-14">
+            <h2 className="mb-6 text-xl font-medium tracking-tight">
+              {group.title}
+            </h2>
+            <div className="faq-home">
+              {group.items.map((f) => (
+                <details key={f.q}>
+                  <summary>
+                    {f.q}
+                    <span aria-hidden="true">+</span>
+                  </summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </section>
         ))}
-      </div>
-
-      <div className="flex justify-center pb-24">
-        <DownloadButton variant="primary" showMeta />
+        <div className="flex flex-wrap items-center justify-between gap-6 border-t border-border pt-8">
+          <Link href="/docs#troubleshooting" className="text-link">
+            Setup & troubleshooting <ArrowRight size={15} />
+          </Link>
+          <DownloadButton />
+        </div>
       </div>
     </>
   );

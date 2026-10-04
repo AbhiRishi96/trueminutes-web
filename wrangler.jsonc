@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "trueminutes-website",
+  "account_id": "2f4f5ac01cb8c8c8e5bfa8cd54400237",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "preview_urls": false,
+  "send_metrics": false,
+  "observability": { "enabled": false },
+  "logpush": false,
+  "assets": {
+    "directory": "./out"
+  }
+}

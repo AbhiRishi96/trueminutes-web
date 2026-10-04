@@ -1,228 +1,323 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { AppScreenshot } from "@/components/AppScreenshot";
+import {
+  ArrowRight,
+  AudioLines,
+  Check,
+  Download,
+  FileText,
+  LockKeyhole,
+  MessageSquare,
+  Monitor,
+  ShieldCheck,
+} from "lucide-react";
+import { AskDemo } from "@/components/AskDemo";
 import { DownloadButton, SecondaryLink } from "@/components/DownloadButton";
+import { ProductDemo } from "@/components/ProductDemo";
 import { Section } from "@/components/Section";
-import { SITE } from "@/lib/site";
+import { SITE, INSTALL } from "@/lib/site";
 
-const PILLARS = [
-  {
-    title: "No bot in the call",
-    body: "TrueMinutes never joins as a participant. Capture runs on your Mac from verified meeting surfaces.",
-  },
-  {
-    title: "Private by default",
-    body: "Audio and transcripts stay local. Cloud ASR and summaries only after you opt in.",
-  },
-  {
-    title: "Works where you meet",
-    body: SITE.platforms.join(", ") + " — browser and native clients.",
-  },
-];
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
-const JOURNEY = [
+const QUESTIONS = [
   {
-    step: "Before",
-    title: "Show up prepared",
-    body: "Calendar sync surfaces what’s next. Capture readiness shows mic, Accessibility, and local models before you join.",
-    shot: "calendar" as const,
+    q: "Is TrueMinutes free?",
+    a: "Yes. The current Mac release is free to download. Local models run on your own hardware. If you enable a cloud provider, that provider may charge for usage.",
   },
   {
-    step: "During",
-    title: "Stay present",
-    body: "Mute-aware capture follows the call. Auto-stops when verified leave says the meeting ended — no stranger in the roster.",
-    shot: "home" as const,
+    q: "Does a bot join my meeting?",
+    a: "No. TrueMinutes captures audio on your Mac and never appears as a participant. Tell participants when you record and follow your organization’s recording policy.",
   },
   {
-    step: "After",
-    title: "Notes you can ship",
-    body: "Summaries, decisions, action items, and transcripts — searchable and exportable the moment you’re done.",
-    shot: "meetingDetail" as const,
-  },
-];
-
-const FAQ = [
-  {
-    q: "Will other participants see TrueMinutes?",
-    a: "No. It never joins the call. Recording happens on your Mac.",
+    q: "Can my meetings stay on my Mac?",
+    a: "Yes. Transcription, summaries, and Ask can use local models. Cloud processing and encrypted Google Drive sync are separate opt-ins. Drive sync does not upload audio.",
   },
   {
-    q: "Do I need host permission?",
-    a: "Not for a bot — there isn’t one. Follow your company policy and local law on recording.",
-  },
-  {
-    q: "Is processing local?",
-    a: "Yes by default (WhisperKit + local summarization). Cloud options stay opt-in in Settings.",
+    q: "What do I need to get started?",
+    a: "An Apple silicon Mac with macOS 14.4 or later. Guided setup downloads local models and explains permissions. The standard local summary model requires 16 GB of RAM; model downloads need several GB of disk space and an internet connection.",
   },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* Hero — one composition */}
-      <section className="relative overflow-hidden px-5 pb-8 pt-16 sm:pt-24">
-        <div className="relative mx-auto max-w-3xl text-center">
-          <p className="animate-fade-up mb-6 text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-violet-soft">
-            For macOS · Apple Silicon
-          </p>
-          <h1 className="animate-fade-up-delay text-balance text-[2.5rem] font-semibold leading-[1.08] tracking-[var(--tracking-display)] text-white sm:text-6xl sm:leading-[1.05]">
-            Meeting notes{" "}
-            <span className="text-gradient">without the awkward bot.</span>
+      <section className="home-hero">
+        <div className="hero-copy">
+          <Link className="release-pill" href="/download">
+            <span className="release-dot" />
+            Free Mac app <span className="pill-divider" /> v{SITE.version}{" "}
+            <ArrowRight size={13} />
+          </Link>
+          <h1>
+            Be in the meeting.
+            <br />
+            <span>Keep every next step.</span>
           </h1>
-          <p className="animate-fade-up-delay-2 mx-auto mt-6 max-w-xl text-pretty text-lg leading-relaxed text-muted">
-            Capture, transcribe, and search every conversation on your Mac — privately, with zero bots in the participant list.
+          <p className="hero-description">
+            Turn conversations into clear notes, decisions, and action items.
+            Then ask your meetings what you missed. All on your Mac, without a
+            meeting bot.
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <DownloadButton variant="primary" />
-            <SecondaryLink href="#how-it-works">
-              See how it works
-              <ArrowRight size={16} aria-hidden />
+          <div className="hero-actions">
+            <DownloadButton />
+            <SecondaryLink href="#product">
+              <Monitor size={16} /> Explore the product
             </SecondaryLink>
           </div>
-          <p className="mt-4 text-xs text-dim">
-            {SITE.macosMin} · {SITE.arch} · Free download
+          <p className="hero-requirements">
+            Free download <span>·</span> {SITE.macosMin} <span>·</span>{" "}
+            {SITE.arch}
           </p>
-        </div>
-
-        <div className="animate-fade-up-delay-2 relative mx-auto mt-16 max-w-5xl">
-          <AppScreenshot shot="meetingsLibrary" priority />
-        </div>
-      </section>
-
-      {/* Platforms — quiet strip */}
-      <section className="border-y border-border/80 py-8">
-        <p className="mb-4 text-center text-xs font-medium uppercase tracking-[0.14em] text-dim">
-          Works with
-        </p>
-        <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-x-8 gap-y-3 px-5 text-sm font-medium text-muted">
-          {SITE.platforms.map((p) => (
-            <span key={p}>{p}</span>
-          ))}
-        </div>
-      </section>
-
-      {/* Three pillars — Granola clarity */}
-      <Section
-        eyebrow="Why TrueMinutes"
-        title="Notes, actions, and memory — without inviting a recorder"
-        description="Built for confidential calls where a third-party bot is a non-starter."
-      >
-        <div className="grid gap-8 md:grid-cols-3 md:gap-10">
-          {PILLARS.map((p) => (
-            <div key={p.title} className="text-left">
-              <h3 className="text-lg font-semibold tracking-tight text-white">{p.title}</h3>
-              <p className="mt-3 text-[0.95rem] leading-relaxed text-muted">{p.body}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Journey */}
-      <div id="how-it-works">
-        {JOURNEY.map((item, i) => (
-          <section
-            key={item.step}
-            className={`border-t border-border/60 ${i % 2 === 1 ? "bg-surface/40" : ""}`}
-          >
-            <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 lg:grid-cols-2 lg:gap-16 lg:py-28">
-              <div className={i % 2 === 1 ? "lg:order-2" : ""}>
-                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-violet-soft">
-                  {item.step}
-                </p>
-                <h2 className="mt-4 text-3xl font-semibold tracking-[var(--tracking-display)] text-white sm:text-4xl">
-                  {item.title}
-                </h2>
-                <p className="mt-5 max-w-md text-base leading-relaxed text-muted">{item.body}</p>
-              </div>
-              <div className={i % 2 === 1 ? "lg:order-1" : ""}>
-                <AppScreenshot shot={item.shot} />
-              </div>
-            </div>
-          </section>
-        ))}
-      </div>
-
-      {/* Ask */}
-      <Section
-        eyebrow="Ask TrueMinutes"
-        title="Perfect meeting memory"
-        description="Ask questions across your library. Answers cite the meetings they came from — on your Mac by default."
-      >
-        <AppScreenshot shot="ask" />
-      </Section>
-
-      {/* Local vs cloud — quiet */}
-      <Section
-        eyebrow="Privacy"
-        title="Local-first. Cloud when you choose."
-        description="Raw audio stays on disk with retention you control. WhisperKit and local models handle the default path."
-      >
-        <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-surface-2/50 p-6 text-left">
-            <p className="text-sm font-semibold text-emerald">On device</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted">
-              <li>WhisperKit transcription</li>
-              <li>Local summarization & Ask</li>
-              <li>Configurable audio retention</li>
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-border bg-surface-2/50 p-6 text-left">
-            <p className="text-sm font-semibold text-cyan">Opt-in cloud</p>
-            <ul className="mt-3 space-y-2 text-sm text-muted">
-              <li>ChatGPT, Claude, Groq, OpenRouter</li>
-              <li>Optional cloud transcription pass</li>
-              <li>Local-only mode available</li>
-            </ul>
-          </div>
-        </div>
-        <p className="mt-8 text-center text-sm">
-          <Link href="/privacy" className="font-medium text-violet-soft no-underline hover:text-white">
-            Read the privacy model →
+          <Link href="/download#install-note" className="hero-install-note">
+            {INSTALL.link}{" "}
+            <ArrowRight size={12} />
           </Link>
+        </div>
+        <div id="product" className="hero-product">
+          <ProductDemo />
+        </div>
+      </section>
+      <section className="platform-section" aria-label="Meeting platforms">
+        <p>For the conversations you already have</p>
+        <div>
+          {SITE.platforms.map((p) => (
+            <span key={p}>
+              <AudioLines size={16} />
+              {p}
+            </span>
+          ))}
+        </div>
+        <small>
+          Detection depends on the meeting app and its visible call controls.{" "}
+          <Link href="/docs#compatibility">Check compatibility →</Link>
+        </small>
+      </section>
+      <Section
+        eyebrow="LESS RECONSTRUCTING. MORE DOING."
+        title={
+          <>
+            The meeting ends.
+            <br />
+            The context stays.
+          </>
+        }
+        description="Your next task shouldn’t be remembering who said what."
+      >
+        <div className="benefit-grid">
+          {[
+            {
+              icon: FileText,
+              title: "Leave with a clear plan",
+              body: "Summaries, decisions, and action items bring the important parts together. Keep your own notes beside the transcript.",
+              label: "From conversation to next steps",
+              href: "/features#notes",
+            },
+            {
+              icon: MessageSquare,
+              title: "Find the answer again",
+              body: "Ask one meeting or your whole library. Follow source references back to the conversation and check the context.",
+              label: "A memory you can question",
+              href: "#ask",
+            },
+            {
+              icon: LockKeyhole,
+              title: "Keep control of your data",
+              body: "Process on your Mac with local models. Choose cloud AI or encrypted Drive sync only when you want them.",
+              label: "Local-first by default",
+              href: "/privacy",
+            },
+          ].map((item) => (
+            <article key={item.title} className="benefit-card">
+              <span className="feature-icon">
+                <item.icon size={22} />
+              </span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+              <Link href={item.href}>
+                {item.label}
+                <ArrowRight size={14} />
+              </Link>
+            </article>
+          ))}
+        </div>
+      </Section>
+      <section className="workflow-section" id="workflow">
+        <div className="workflow-heading">
+          <p className="eyebrow">A BETTER MEETING ROUTINE</p>
+          <h2>
+            Show up. Listen.
+            <br />
+            <span>Move things forward.</span>
+          </h2>
+          <p>
+            TrueMinutes fits around your call, from the first prompt to the
+            follow-up.
+          </p>
+          <Link className="text-link" href="/docs">
+            Walk through your first meeting <ArrowRight size={15} />
+          </Link>
+        </div>
+        <ol className="workflow-steps">
+          {[
+            {
+              title: "Join your call",
+              body: "See upcoming meetings with optional Google Calendar. Once joined-call controls are verified, choose Start or Skip.",
+            },
+            {
+              title: "Give it your attention",
+              body: "Capture the meeting app’s audio on your Mac. A visible recording control keeps pause, microphone, and stop actions close.",
+            },
+            {
+              title: "Leave with something useful",
+              body: "After the call, transcription and summarization finish in the background. Review the notes, check the sources, and share what matters.",
+            },
+          ].map((step, i) => (
+            <li key={step.title}>
+              <span className="step-number">0{i + 1}</span>
+              <div>
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+      <Section
+        id="ask"
+        eyebrow="YOUR CONVERSATIONS, CONNECTED"
+        title="“What did we decide last time?”"
+        description="Ask your meeting memory. Get a useful answer and a source to check."
+      >
+        <AskDemo />
+      </Section>
+      <section className="privacy-feature">
+        <div>
+          <span className="feature-icon">
+            <ShieldCheck size={26} />
+          </span>
+          <p className="eyebrow">BUILT AROUND YOUR CHOICES</p>
+          <h2>
+            Your Mac.
+            <br />
+            Your meeting memory.
+          </h2>
+          <p>
+            Local processing isn’t a premium extra. It’s the default. Choose
+            what leaves your Mac, and when.
+          </p>
+          <Link className="text-link" href="/privacy">
+            Understand the privacy model <ArrowRight size={15} />
+          </Link>
+        </div>
+        <div className="privacy-ledger">
+          {[
+            {
+              title: "Meeting audio",
+              detail: "Stored on your Mac. Cloud transcription is optional.",
+              badge: "LOCAL BY DEFAULT",
+            },
+            {
+              title: "Summaries & Ask",
+              detail: "Use a local model, or choose a cloud provider.",
+              badge: "YOUR CHOICE",
+            },
+            {
+              title: "Across your Macs",
+              detail:
+                "Optional encrypted Drive sync for notes and transcripts. No audio upload.",
+              badge: "OPT-IN SYNC",
+            },
+          ].map((row) => (
+            <div key={row.title}>
+              <Check size={18} />
+              <div>
+                <h3>{row.title}</h3>
+                <p>{row.detail}</p>
+                <span>{row.badge}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+      <Section
+        eyebrow="MADE FOR YOUR EVERYDAY CALLS"
+        title="Keep the work moving."
+        description="A useful record for the conversations that shape your day."
+      >
+        <div className="use-case-grid">
+          {[
+            [
+              "01",
+              "Product & engineering",
+              "Return to the decision behind a scope change. Keep owners and open questions in view.",
+            ],
+            [
+              "02",
+              "Customer conversations",
+              "Stay focused on the person talking. Review needs and next steps after the call.",
+            ],
+            [
+              "03",
+              "1:1s & recurring syncs",
+              "Carry context into the next conversation. Search past notes instead of starting from scratch.",
+            ],
+          ].map(([number, title, body]) => (
+            <article key={title}>
+              <span>{number}</span>
+              <h3>{title}</h3>
+              <p>{body}</p>
+            </article>
+          ))}
+        </div>
+        <p className="section-footnote">
+          Record with participants’ knowledge and in line with your
+          organization’s policy.
         </p>
       </Section>
-
-      {/* FAQ */}
-      <Section eyebrow="FAQ" title="Before you download">
-        <div className="mx-auto flex max-w-xl flex-col divide-y divide-border border-y border-border">
-          {FAQ.map((f) => (
-            <details key={f.q} className="group py-5">
-              <summary className="cursor-pointer list-none text-left text-[0.95rem] font-semibold text-white [&::-webkit-details-marker]:hidden">
+      <Section
+        eyebrow="BEFORE YOUR FIRST MEETING"
+        title="A few things worth knowing."
+      >
+        <div className="faq-home">
+          {QUESTIONS.map((f) => (
+            <details key={f.q}>
+              <summary>
                 {f.q}
+                <span aria-hidden="true">+</span>
               </summary>
-              <p className="mt-3 text-sm leading-relaxed text-muted">{f.a}</p>
+              <p>{f.a}</p>
             </details>
           ))}
         </div>
-        <p className="mt-8 text-center text-sm">
-          <Link href="/faq" className="font-medium text-violet-soft no-underline hover:text-white">
-            More questions →
+        <p className="section-footnote">
+          <Link className="text-link" href="/faq">
+            All questions, answered <ArrowRight size={14} />
           </Link>
         </p>
       </Section>
-
-      {/* Final CTA — clean, no Gatekeeper scare */}
-      <section className="px-5 pb-28">
-        <div className="mx-auto max-w-3xl rounded-[1.75rem] border border-border bg-surface px-8 py-16 text-center sm:px-12">
-          <Image
-            src="/brand/app-icon.png"
-            alt=""
-            width={56}
-            height={56}
-            className="mx-auto rounded-2xl"
-          />
-          <h2 className="mt-6 text-3xl font-semibold tracking-[var(--tracking-display)] text-white sm:text-4xl">
-            Start your next meeting with TrueMinutes
-          </h2>
-          <p className="mx-auto mt-4 max-w-md text-muted">
-            Download the Mac app, grant permissions once, and capture your first call.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <DownloadButton variant="primary" showMeta />
-            <SecondaryLink href="/docs">Setup guide</SecondaryLink>
-          </div>
+      <section className="final-cta">
+        <span className="feature-icon">
+          <Download size={24} />
+        </span>
+        <p className="eyebrow">YOUR NEXT MEETING, WITH MORE CLARITY</p>
+        <h2>
+          Less note-taking.
+          <br />
+          <span>More being there.</span>
+        </h2>
+        <p>Start with TrueMinutes for Mac. Free, local-first, and bot-free.</p>
+        <div className="hero-actions">
+          <DownloadButton />
+          <SecondaryLink href="/docs">
+            Read the setup guide <ArrowRight size={15} />
+          </SecondaryLink>
         </div>
+        <p className="hero-requirements">
+          v{SITE.version} · {SITE.macosMin} · {SITE.arch}
+        </p>
+        <Link href="/download#install-note" className="hero-install-note">
+          Review requirements and first-launch instructions
+        </Link>
       </section>
     </>
   );

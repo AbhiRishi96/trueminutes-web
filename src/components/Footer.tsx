@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ContactLinks } from "@/components/ContactLinks";
 import { NAV_LINKS, SITE } from "@/lib/site";
 
 export function Footer() {
@@ -57,6 +58,14 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/download#changelog"
+                  className="text-muted no-underline transition-colors hover:text-white"
+                >
+                  Changelog
+                </Link>
+              </li>
+              <li>
                 <a
                   href={SITE.releases}
                   className="text-muted no-underline transition-colors hover:text-white"
@@ -77,6 +86,12 @@ export function Footer() {
                 </a>
               </li>
             </ul>
+          </div>
+          <div>
+            <p className="mb-3 text-[11px] font-medium tracking-[0.06em] text-dim uppercase">
+              Contact
+            </p>
+            <ContactLinks />
           </div>
         </div>
       </div>

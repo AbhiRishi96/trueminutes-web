@@ -355,9 +355,14 @@ export function ProductPreview({
                   "Choose your model during guided setup.",
                 ],
                 [
+                  "Google account",
+                  "Connect",
+                  "Optional Calendar and Drive sign-in via secure OAuth.",
+                ],
+                [
                   "Google Drive sync",
                   "Optional",
-                  "Encrypt notes before upload. Audio is excluded.",
+                  "Encrypt notes and Ask chats before upload. Audio is excluded.",
                 ],
                 [
                   "Cloud AI",

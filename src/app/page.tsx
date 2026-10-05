@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { AskDemo } from "@/components/AskDemo";
 import { DownloadButton, SecondaryLink } from "@/components/DownloadButton";
+import { GoogleSyncDemo } from "@/components/GoogleSyncDemo";
+import { MeetingChromeDemo } from "@/components/MeetingChromeDemo";
 import { ProductDemo } from "@/components/ProductDemo";
 import { Section } from "@/components/Section";
 import { SITE, INSTALL } from "@/lib/site";
@@ -30,7 +32,7 @@ const QUESTIONS = [
   },
   {
     q: "Can my meetings stay on my Mac?",
-    a: "Yes. Transcription, summaries, and Ask can use local models. Cloud processing and encrypted Google Drive sync are separate opt-ins. Drive sync does not upload audio.",
+    a: "Yes. Transcription, summaries, and Ask can use local models. Cloud processing and encrypted Google Drive sync are separate opt-ins. Drive sync can include notes, transcripts, and Ask chats — not audio.",
   },
   {
     q: "What do I need to get started?",
@@ -60,8 +62,8 @@ export default function HomePage() {
           </p>
           <div className="hero-actions">
             <DownloadButton />
-            <SecondaryLink href="#product">
-              <Monitor size={16} /> Explore the product
+            <SecondaryLink href="/tour">
+              <Monitor size={16} /> Take the product tour
             </SecondaryLink>
           </div>
           <p className="hero-requirements">
@@ -161,15 +163,15 @@ export default function HomePage() {
           {[
             {
               title: "Join your call",
-              body: "See upcoming meetings with optional Google Calendar. Once joined-call controls are verified, choose Start or Skip.",
+              body: "Optional Google Calendar shows what’s next. When joined-call controls are verified, the join island lets you Transcribe, open more options, or skip.",
             },
             {
               title: "Give it your attention",
-              body: "Capture the meeting app’s audio on your Mac. A visible recording control keeps pause, microphone, and stop actions close.",
+              body: "A floating recording pill keeps timer, mic status, and Stop in view while you stay in the conversation.",
             },
             {
               title: "Leave with something useful",
-              body: "After the call, transcription and summarization finish in the background. Review the notes, check the sources, and share what matters.",
+              body: "After the call, transcription and summarization finish in the background. Ask your library, check sources, and sync Ask chats if you opt in.",
             },
           ].map((step, i) => (
             <li key={step.title}>
@@ -183,12 +185,28 @@ export default function HomePage() {
         </ol>
       </section>
       <Section
+        id="overlays"
+        eyebrow="AROUND THE CALL"
+        title="Join island. Recording pill. Always in reach."
+        description="A compact join prompt when a call is verified, then a floating mic and timer while you capture."
+      >
+        <MeetingChromeDemo />
+      </Section>
+      <Section
         id="ask"
         eyebrow="YOUR CONVERSATIONS, CONNECTED"
         title="“What did we decide last time?”"
-        description="Ask your meeting memory. Get a useful answer and a source to check."
+        description="Ask TrueMinutes searches your library — or a folder, date range, or one meeting — and answers with sources you can open."
       >
         <AskDemo />
+      </Section>
+      <Section
+        id="sync"
+        eyebrow="OPTIONAL GOOGLE CONNECTIONS"
+        title="Sign in once. Sync the memory you choose."
+        description="Connect Google for Calendar and encrypted Drive sync. Ask chats travel with your vault across Macs — audio stays on each machine."
+      >
+        <GoogleSyncDemo />
       </Section>
       <section className="privacy-feature">
         <div>
@@ -224,7 +242,7 @@ export default function HomePage() {
             {
               title: "Across your Macs",
               detail:
-                "Optional encrypted Drive sync for notes and transcripts. No audio upload.",
+                "Optional encrypted Drive sync for notes, transcripts, and Ask chats. No audio upload.",
               badge: "OPT-IN SYNC",
             },
           ].map((row) => (

@@ -93,12 +93,13 @@ const SECTIONS = [
           controls.
         </li>
         <li>
-          Choose Start in the detection prompt. For browser calls, review and
-          authorize the application audio scope for that session.
+          Choose Transcribe on the join island, or open the menu for series
+          rules or Skip. For browser calls, review and authorize the application
+          audio scope for that session.
         </li>
         <li>
-          Check the visible recording control. Pause, adjust the mic policy, or
-          stop whenever needed.
+          Check the floating recording pill. Adjust mic include/off or Stop
+          whenever needed.
         </li>
         <li>
           Leave the meeting or choose Stop. Transcription and summary generation

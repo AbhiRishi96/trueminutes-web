@@ -8,6 +8,7 @@ import {
   KeyRound,
   ShieldCheck,
 } from "lucide-react";
+import { ContactLinks } from "@/components/ContactLinks";
 import { PageHero } from "@/components/Section";
 import { SITE } from "@/lib/site";
 
@@ -177,6 +178,14 @@ export default function PrivacyPage() {
                 Review permissions and setup <ArrowRight size={14} />
               </Link>
             </p>
+          </section>
+          <section className="border-t border-border pt-10">
+            <h2 className="text-xl font-medium">Contact</h2>
+            <p className="mt-4 text-sm leading-7 text-muted">
+              For product questions or feedback, use the links below. Do not
+              send recordings, transcripts, or credentials.
+            </p>
+            <ContactLinks className="mt-5" />
           </section>
         </div>
       </div>

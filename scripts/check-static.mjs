@@ -7,7 +7,7 @@ const release = JSON.parse(await readFile(join(root, "release.json"), "utf8"));
 const origin =
   process.env.NEXT_PUBLIC_SITE_URL ??
   "https://trueminutes-website.trueminutes-google-oauth.workers.dev";
-const pages = ["", "features", "download", "docs", "privacy", "faq"];
+const pages = ["", "features", "tour", "download", "docs", "privacy", "faq"];
 let links = 0;
 for (const page of pages) {
   const route = `/${page ? `${page}/` : ""}`;
@@ -83,6 +83,18 @@ assert.ok(
 assert.ok(
   home.includes(`"softwareVersion":"${release.version}"`),
   "Structured version matches release",
+);
+assert.ok(
+  Array.isArray(release.changelog),
+  "Release metadata includes changelog",
+);
+assert.ok(
+  Array.isArray(release.history) && release.history.length > 0,
+  "Release metadata includes version history",
+);
+assert.ok(
+  download.includes('id="changelog"'),
+  "Download page exposes changelog section",
 );
 const sitemap = await readFile(join(root, "sitemap.xml"), "utf8");
 for (const page of pages)

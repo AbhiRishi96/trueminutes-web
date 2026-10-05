@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowDownToLine, ArrowRight, Check, Monitor } from "lucide-react";
+import { Changelog } from "@/components/Changelog";
 import { PageHero } from "@/components/Section";
 import { SITE, INSTALL } from "@/lib/site";
 
@@ -137,6 +138,30 @@ export default function DownloadPage() {
             Privacy details <ArrowRight size={14} />
           </Link>
         </div>
+      </section>
+      <section id="changelog" className="mx-auto max-w-4xl px-5 pb-20">
+        <p className="eyebrow">WHAT’S NEW</p>
+        <h2 className="mt-3 text-3xl font-medium tracking-tight">
+          Version history
+        </h2>
+        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted">
+          The latest app version syncs automatically from the official GitHub
+          release. Recent changelogs stay here so you can scan what changed
+          without leaving the site.
+        </p>
+        <Changelog className="mt-10" />
+        <p className="mt-8 text-xs text-dim">
+          Older releases remain on{" "}
+          <a
+            href={`${SITE.releasesRepo}/releases`}
+            className="underline underline-offset-4 hover:text-white"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub Releases
+          </a>
+          . This page keeps the latest plus a short recent history.
+        </p>
       </section>
     </>
   );

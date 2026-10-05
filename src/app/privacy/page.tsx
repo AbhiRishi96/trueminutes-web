@@ -178,6 +178,31 @@ export default function PrivacyPage() {
               </Link>
             </p>
           </section>
+          <section className="border-t border-border pt-10">
+            <h2 className="text-xl font-medium">Contact</h2>
+            <p className="mt-4 text-sm leading-7 text-muted">
+              Built by {SITE.author}. For product questions or feedback, reach
+              out on{" "}
+              <a
+                href={SITE.github}
+                className="text-violet-200 underline underline-offset-4"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>{" "}
+              or{" "}
+              <a
+                href={SITE.linkedin}
+                className="text-violet-200 underline underline-offset-4"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </a>
+              . Do not send recordings, transcripts, or credentials.
+            </p>
+          </section>
         </div>
       </div>
     </>

@@ -49,7 +49,7 @@ const TABS: {
     label: "Privacy",
     icon: ShieldCheck,
     description:
-      "On-device processing by default. Cloud AI and encrypted Drive sync are your choice.",
+      "On-device processing by default. Google sign-in, Drive sync, and cloud AI are your choice.",
   },
 ];
 

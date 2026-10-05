@@ -2,6 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   fingerprint,
+  parseChangelog,
   releaseMetadata,
   RELEASES_REPO,
 } from "./release-contract.mjs";
@@ -31,6 +32,18 @@ test("new stable versions select their official DMG without inheriting signing c
   assert.equal(metadata.version, "1.2.3");
   assert.equal(metadata.notarized, null);
   assert.equal(metadata.signing, "unknown");
+  assert.equal(metadata.schema, 2);
+  assert.deepEqual(metadata.changelog, []);
+});
+
+test("changelog bullets are parsed from GitHub release bodies", () => {
+  const notes = parseChangelog(
+    "### Fixed\n- **Join island** settles into a pill\n- Mic status stays visible\n\n### Notes\n- Not notarized\n",
+  );
+  assert.deepEqual(notes, [
+    "Join island settles into a pill",
+    "Mic status stays visible",
+  ]);
 });
 
 test("replacement builds change identity even when version is unchanged", () => {

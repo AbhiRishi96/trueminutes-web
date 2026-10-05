@@ -32,7 +32,7 @@ Do not run `next build` and `next dev` simultaneously: both use `.next/`. Produc
 
 ## Product content
 
-- Release metadata: generated `public/release.json`, consumed by `src/lib/site.ts`. Every build fetches the latest stable official GitHub release and verifies the DMG's size and SHA-256 before selecting it. No manual version or DMG bump is needed.
+- Release metadata: generated `public/release.json`, consumed by `src/lib/site.ts`. Every build fetches the latest stable official GitHub release, verifies the DMG's size and SHA-256, and stores release notes plus a short recent changelog history for the download page. No manual version or DMG bump is needed.
 - Product preview: `ProductDemo` / `ProductPreview`, with fictional data from `src/lib/mock-data.ts`.
 - Ask sample downloads: `public/examples/`; update these alongside the sample answers.
 - Social image: `public/brand/social-card.png`. Regenerate with `node scripts/generate-social.mjs`.

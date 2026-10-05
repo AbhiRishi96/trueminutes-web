@@ -1,16 +1,107 @@
 {
-  "schema": 1,
+  "schema": 2,
   "repository": "AbhiRishi96/TrueMinutes-releases",
-  "releaseId": 402684659,
-  "version": "0.8.4",
-  "tag": "v0.8.4",
-  "publishedAt": "2026-10-03T20:43:26Z",
-  "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.4",
-  "assetId": 608506274,
-  "assetUpdatedAt": "2026-10-03T20:43:26Z",
-  "assetSize": 25791643,
-  "assetDigest": "sha256:34b60fb4cac1d6ab341cc2e16043cd4198bb9e09c73b65aa3cfb01c5b2afbbb0",
-  "downloadUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/download/v0.8.4/TrueMinutes-0.8.4.dmg",
+  "releaseId": 403650718,
+  "version": "0.8.8",
+  "tag": "v0.8.8",
+  "publishedAt": "2026-10-05T11:41:06Z",
+  "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.8",
+  "assetId": 612676092,
+  "assetUpdatedAt": "2026-10-05T13:35:04Z",
+  "assetSize": 26493322,
+  "assetDigest": "sha256:76d67e5eadd25e2fd0d1dc0eec3bc30d8259d0816e61281905ccc5735a3ff3cb",
+  "downloadUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/download/v0.8.8/TrueMinutes-0.8.8.dmg",
+  "changelog": [
+    "Speaker-off meeting capture uses a Core Audio process tap for native Teams/Zoom and, after the usual per-meeting confirm, for browser Meet/Teams/Zoom, so remote audio is still recorded when Mac speakers are muted or off.",
+    "Menu bar panel sizes to its actions instead of collapsing to a header-only strip, so Open, export, recent meetings, Settings, and Quit stay usable.",
+    "Teams Accessibility scan no longer crashes the app when a meeting UI node is released while TrueMinutes is reading controls."
+  ],
   "signing": "internal",
-  "notarized": false
+  "notarized": false,
+  "history": [
+    {
+      "version": "0.8.8",
+      "tag": "v0.8.8",
+      "publishedAt": "2026-10-05T11:41:06Z",
+      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.8",
+      "changelog": [
+        "Speaker-off meeting capture uses a Core Audio process tap for native Teams/Zoom and, after the usual per-meeting confirm, for browser Meet/Teams/Zoom, so remote audio is still recorded when Mac speakers are muted or off.",
+        "Menu bar panel sizes to its actions instead of collapsing to a header-only strip, so Open, export, recent meetings, Settings, and Quit stay usable.",
+        "Teams Accessibility scan no longer crashes the app when a meeting UI node is released while TrueMinutes is reading controls."
+      ]
+    },
+    {
+      "version": "0.8.7",
+      "tag": "v0.8.7",
+      "publishedAt": "2026-10-05T10:11:10Z",
+      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.7",
+      "changelog": [
+        "Join island drops from the camera as a water drop and settles into a compact 240×40 pill, with the dismiss control on the rim.",
+        "Calendar pre-join uses the same island size and motion, with a starting-soon countdown that does not hide the later live-join island.",
+        "Recording pill grows from a center hole into the vertical compact pill (including a standard mic control) and the smaller Mic/Stop card, then collapses back into that hole when capture ends.",
+        "Overlay policy keeps the island and recording pill visible over fullscreen meeting Spaces without collapsing the recording chrome."
+      ]
+    },
+    {
+      "version": "0.8.6",
+      "tag": "v0.8.6",
+      "publishedAt": "2026-10-04T18:46:17Z",
+      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.6",
+      "changelog": [
+        "Calendar day, week, and month views with account colors, event details, upcoming countdowns, and Join controls.",
+        "Home shortcuts for open action items, recent meetings with processing status, and chats with message previews.",
+        "Optional Google Calendar connection during setup, with connection status and a Skip for now action.",
+        "Custom database row notes accessible from the Notes workspace.",
+        "Meeting review has responsive action buttons and audio controls, clearer transcript bubbles, summary previews, and source labels.",
+        "Library search covers titles, notes, and transcripts, supports Command-F, and preserves archive and folder scope as results refresh.",
+        "Notes pages and databases adapt to narrow windows, filter immediately, restore results when filters clear, and show loading and saving errors.",
+        "Summary editing preserves unsaved drafts and reports save failures without closing the editor."
+      ]
+    },
+    {
+      "version": "0.8.5",
+      "tag": "v0.8.5",
+      "publishedAt": "2026-10-04T06:33:55Z",
+      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.5",
+      "changelog": [
+        "Build 202610040630. See CHANGELOG.md for details."
+      ]
+    },
+    {
+      "version": "0.8.4",
+      "tag": "v0.8.4",
+      "publishedAt": "2026-10-03T20:43:26Z",
+      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.4",
+      "changelog": [
+        "Build 202610032029. See CHANGELOG.md for details."
+      ]
+    },
+    {
+      "version": "0.8.3",
+      "tag": "v0.8.3",
+      "publishedAt": "2026-10-03T07:55:59Z",
+      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.3",
+      "changelog": [
+        "Build 202610030727. See CHANGELOG.md for details."
+      ]
+    },
+    {
+      "version": "0.8.2",
+      "tag": "v0.8.2",
+      "publishedAt": "2026-10-02T15:54:01Z",
+      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.2",
+      "changelog": [
+        "Build 202610021525. See CHANGELOG.md for details."
+      ]
+    },
+    {
+      "version": "0.8.11",
+      "tag": "v0.8.11",
+      "publishedAt": "2026-09-30T18:06:46Z",
+      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.11",
+      "changelog": [
+        "Build 202609301821. See CHANGELOG.md for details."
+      ]
+    }
+  ]
 }

@@ -57,6 +57,14 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/download#changelog"
+                  className="text-muted no-underline transition-colors hover:text-white"
+                >
+                  Changelog
+                </Link>
+              </li>
+              <li>
                 <a
                   href={SITE.releases}
                   className="text-muted no-underline transition-colors hover:text-white"
@@ -74,6 +82,36 @@ export function Footer() {
                   rel="noopener noreferrer"
                 >
                   Privacy policy
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p className="mb-3 text-[11px] font-medium tracking-[0.06em] text-dim uppercase">
+              Contact
+            </p>
+            <ul className="flex flex-col gap-2.5">
+              <li>
+                <span className="text-dim">{SITE.author}</span>
+              </li>
+              <li>
+                <a
+                  href={SITE.github}
+                  className="text-muted no-underline transition-colors hover:text-white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a
+                  href={SITE.linkedin}
+                  className="text-muted no-underline transition-colors hover:text-white"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn
                 </a>
               </li>
             </ul>

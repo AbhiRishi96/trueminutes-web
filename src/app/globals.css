@@ -2079,6 +2079,159 @@
     font-size: 14px;
     color: #a59cab;
   }
+
+  .contact-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #a1a1aa;
+    text-decoration: none;
+    font-size: 13px;
+  }
+
+  .contact-link:hover {
+    color: #fff;
+  }
+
+  .contact-link-icon {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+  }
+
+  .product-tour-progress {
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #a59cab;
+    margin-bottom: 16px;
+  }
+
+  .product-tour-steps {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 28px;
+  }
+
+  .product-tour-steps button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #3a3348;
+    background: rgba(255, 255, 255, 0.02);
+    color: #a59cab;
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .product-tour-steps button span {
+    font-family: var(--font-code), monospace;
+    font-size: 10px;
+    color: #c4afed;
+  }
+
+  .product-tour-steps button[aria-selected="true"] {
+    border-color: #c4a8ff;
+    background: rgba(196, 168, 255, 0.12);
+    color: #ebe3f4;
+  }
+
+  .product-tour-panel {
+    display: grid;
+    gap: 28px;
+  }
+
+  @media (min-width: 900px) {
+    .product-tour-panel {
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: start;
+    }
+  }
+
+  .product-tour-copy h2 {
+    margin: 8px 0 18px;
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-display);
+    color: #fff;
+  }
+
+  .product-tour-copy ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+  }
+
+  .product-tour-copy li {
+    display: flex;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: #a59cab;
+  }
+
+  .product-tour-copy li svg {
+    margin-top: 4px;
+    flex-shrink: 0;
+    color: #5eead4;
+  }
+
+  .product-tour-copy strong {
+    color: #ebe3f4;
+    font-weight: 500;
+  }
+
+  .product-tour-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px;
+    padding-top: 22px;
+    border-top: 1px solid #2d2639;
+  }
+
+  .product-tour-nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #3a3348;
+    background: transparent;
+    color: #ebe3f4;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .product-tour-nav-btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .product-tour-nav-btn.is-next {
+    background: #fff;
+    color: #0a0a0a;
+    border-color: #fff;
+  }
 }
 
 @keyframes join-drop {

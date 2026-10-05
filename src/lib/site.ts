@@ -62,8 +62,8 @@ export const SITE = {
   privacyPolicy:
     "https://abhirishi96.github.io/TrueMinutes-releases/privacy.html",
   github: "https://github.com/AbhiRishi96",
-  linkedin: "https://www.linkedin.com/in/abhishek-rai-",
-  author: "Abhishek Rai",
+  linkedin: "https://www.linkedin.com/in/abhi-rai96/",
+  email: "abhirai1196@gmail.com",
 
   dmg: typedRelease.downloadUrl,
   platforms: [
@@ -97,6 +97,7 @@ export const INSTALL =
 /** Primary chrome links — Download stays a CTA (nav button / dedicated page), not a text item. */
 export const NAV_LINKS = [
   { href: "/features", label: "Features" },
+  { href: "/tour", label: "Tour" },
   { href: "/privacy", label: "Privacy" },
   { href: "/docs", label: "Getting started" },
   { href: "/faq", label: "FAQ" },

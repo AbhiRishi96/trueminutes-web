@@ -7,7 +7,7 @@ const release = JSON.parse(await readFile(join(root, "release.json"), "utf8"));
 const origin =
   process.env.NEXT_PUBLIC_SITE_URL ??
   "https://trueminutes-website.trueminutes-google-oauth.workers.dev";
-const pages = ["", "features", "download", "docs", "privacy", "faq"];
+const pages = ["", "features", "tour", "download", "docs", "privacy", "faq"];
 let links = 0;
 for (const page of pages) {
   const route = `/${page ? `${page}/` : ""}`;

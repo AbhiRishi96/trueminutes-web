@@ -151,6 +151,12 @@ export default function FeaturesPage() {
           </Link>
         </p>
         <div className="mt-14 text-center">
+          <p className="mb-5 text-sm text-muted">
+            Prefer a walkthrough of every feature?{" "}
+            <Link href="/tour" className="text-link">
+              Take the product tour <ArrowRight size={13} />
+            </Link>
+          </p>
           <DownloadButton showMeta />
         </div>
       </div>

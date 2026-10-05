@@ -62,8 +62,8 @@ export default function HomePage() {
           </p>
           <div className="hero-actions">
             <DownloadButton />
-            <SecondaryLink href="#product">
-              <Monitor size={16} /> Explore the product
+            <SecondaryLink href="/tour">
+              <Monitor size={16} /> Take the product tour
             </SecondaryLink>
           </div>
           <p className="hero-requirements">

@@ -8,6 +8,7 @@ import {
   KeyRound,
   ShieldCheck,
 } from "lucide-react";
+import { ContactLinks } from "@/components/ContactLinks";
 import { PageHero } from "@/components/Section";
 import { SITE } from "@/lib/site";
 
@@ -181,27 +182,10 @@ export default function PrivacyPage() {
           <section className="border-t border-border pt-10">
             <h2 className="text-xl font-medium">Contact</h2>
             <p className="mt-4 text-sm leading-7 text-muted">
-              Built by {SITE.author}. For product questions or feedback, reach
-              out on{" "}
-              <a
-                href={SITE.github}
-                className="text-violet-200 underline underline-offset-4"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>{" "}
-              or{" "}
-              <a
-                href={SITE.linkedin}
-                className="text-violet-200 underline underline-offset-4"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn
-              </a>
-              . Do not send recordings, transcripts, or credentials.
+              For product questions or feedback, use the links below. Do not
+              send recordings, transcripts, or credentials.
             </p>
+            <ContactLinks className="mt-5" />
           </section>
         </div>
       </div>

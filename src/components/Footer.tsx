@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { ContactLinks } from "@/components/ContactLinks";
 import { NAV_LINKS, SITE } from "@/lib/site";
 
 export function Footer() {
@@ -90,31 +91,7 @@ export function Footer() {
             <p className="mb-3 text-[11px] font-medium tracking-[0.06em] text-dim uppercase">
               Contact
             </p>
-            <ul className="flex flex-col gap-2.5">
-              <li>
-                <span className="text-dim">{SITE.author}</span>
-              </li>
-              <li>
-                <a
-                  href={SITE.github}
-                  className="text-muted no-underline transition-colors hover:text-white"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a
-                  href={SITE.linkedin}
-                  className="text-muted no-underline transition-colors hover:text-white"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  LinkedIn
-                </a>
-              </li>
-            </ul>
+            <ContactLinks />
           </div>
         </div>
       </div>

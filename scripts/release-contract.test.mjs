@@ -85,3 +85,15 @@ test("signing evidence never transfers to a rebuilt 0.8.4 asset", () => {
   release.assets[0].id++;
   assert.equal(releaseMetadata(release).notarized, null);
 });
+
+test("0.8.9 signing is bound to the known asset id and digest", () => {
+  const release = fixture("0.8.9");
+  release.assets[0].id = 615442890;
+  release.assets[0].digest =
+    "sha256:894477d49e2dd321462187f67eb77f65ace3689d41e87518944a20d79a1fdfc3";
+  const metadata = releaseMetadata(release);
+  assert.equal(metadata.signing, "internal");
+  assert.equal(metadata.notarized, false);
+  release.assets[0].id++;
+  assert.equal(releaseMetadata(release).signing, "unknown");
+});

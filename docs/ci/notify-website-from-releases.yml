@@ -1,0 +1,33 @@
+# Installed on AbhiRishi96/TrueMinutes-releases. Fires when a GitHub
+# Release is published. Needs secret WEBSITE_SYNC_TOKEN: a PAT or fine-grained
+# token with Actions: write on AbhiRishi96/TrueMinutes (to start
+# "Sync marketing website"). If the secret is missing, the job succeeds
+# without dispatch — Sparkle's workflow_run on TrueMinutes still syncs.
+name: Notify marketing website
+
+on:
+  release:
+    types: [published, edited]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Dispatch TrueMinutes website sync
+        env:
+          GH_TOKEN: ${{ secrets.WEBSITE_SYNC_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "WEBSITE_SYNC_TOKEN is not set. Skipping dispatch. TrueMinutes still syncs after Sparkle release and on a twice-hourly schedule."
+            exit 0
+          fi
+          gh workflow run "Sync marketing website" \
+            --repo AbhiRishi96/TrueMinutes \
+            --ref main
+          echo "Dispatched Sync marketing website on TrueMinutes."

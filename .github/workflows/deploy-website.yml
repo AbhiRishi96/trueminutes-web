@@ -9,7 +9,7 @@ on:
     - cron: "17,47 * * * *"
   workflow_dispatch:
   repository_dispatch:
-    types: [trueminutes-release]
+    types: [trueminutes-release, trueminutes-app]
 
 permissions:
   contents: read
@@ -20,6 +20,9 @@ concurrency:
 
 jobs:
   deploy:
+    # GitHub-hosted fallback. Production sync runs on the TrueMinutes
+    # self-hosted runner (workflow Sync marketing website). This job skips
+    # deploy when CLOUDFLARE_API_TOKEN is not set on this public repo.
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
@@ -37,17 +40,19 @@ jobs:
       - name: Compare published release with website
         id: release
         run: npm run release:probe
-      - name: Validate deployment configuration
-        if: steps.release.outputs.changed == 'true' || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+      - name: Check Cloudflare token
+        id: cloudflare
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-            echo "::error::Set repository secret CLOUDFLARE_API_TOKEN before enabling automatic deployment."
-            exit 1
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "No CLOUDFLARE_API_TOKEN on this repository. GitHub-hosted deploy is skipped; the TrueMinutes self-hosted runner owns production sync." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "present=true" >> "$GITHUB_OUTPUT"
           fi
       - name: Install, build, and validate
-        if: steps.release.outputs.changed == 'true' || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: steps.cloudflare.outputs.present == 'true' && (steps.release.outputs.changed == 'true' || github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch')
         run: |
           npm ci
           npm run build
@@ -55,18 +60,14 @@ jobs:
           npm run check:static
           npm run release:verify
       - name: Deploy the website Worker only
-        if: steps.release.outputs.changed == 'true' || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: steps.cloudflare.outputs.present == 'true' && (steps.release.outputs.changed == 'true' || github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch')
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: npx wrangler deploy
       - name: Verify deployed website
-        if: steps.release.outputs.changed == 'true' || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        if: steps.cloudflare.outputs.present == 'true' && (steps.release.outputs.changed == 'true' || github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event_name == 'repository_dispatch')
         run: npm run check:live -- "$NEXT_PUBLIC_SITE_URL"
       - name: Publish run summary
         if: success()
         run: |
-          if [ "${{ steps.release.outputs.changed }}" = "true" ] || [ "${{ github.event_name }}" = "push" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "Published release synchronized and website verified." >> "$GITHUB_STEP_SUMMARY"
-          else
-            echo "Published release already synchronized. Scheduled runs skip deployment when unchanged." >> "$GITHUB_STEP_SUMMARY"
-          fi
+          echo "GitHub-hosted job finished. Production website sync is the TrueMinutes self-hosted workflow." >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,71 @@
+# Installed on AbhiRishi96/TrueMinutes so it can use the `trueminutes`
+# self-hosted macOS runner (labels: self-hosted, macOS). Do not add this
+# file to trueminutes-web — that public repo has no runner registration.
+name: Sync marketing website
+
+on:
+  workflow_run:
+    workflows: ["Release Sparkle update"]
+    types: [completed]
+  schedule:
+    - cron: "22,52 * * * *"
+  workflow_dispatch:
+  repository_dispatch:
+    types: [trueminutes-release, trueminutes-website-sync]
+  push:
+    branches: [main, master]
+    paths:
+      - ".github/workflows/sync-website.yml"
+
+concurrency:
+  group: trueminutes-website-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: [self-hosted, macOS]
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    env:
+      NEXT_PUBLIC_SITE_URL: https://trueminutes-website.trueminutes-google-oauth.workers.dev
+      WRANGLER_SEND_METRICS: "false"
+      GH_TOKEN: ${{ github.token }}
+    defaults:
+      run:
+        working-directory: website
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          repository: AbhiRishi96/trueminutes-web
+          path: website
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+      - name: Test, build, and deploy website
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run test:release
+          npm run build
+          npm run typecheck
+          npm run check:static
+          npm run release:verify
+          if [ -n "${CLOUDFLARE_API_TOKEN:-}" ]; then
+            npx wrangler deploy
+          elif npx wrangler whoami >/dev/null 2>&1; then
+            echo "Using Wrangler login already present on this self-hosted runner."
+            npx wrangler deploy
+          else
+            echo "::error::Add repository secret CLOUDFLARE_API_TOKEN on TrueMinutes (Workers deploy on account 2f4f5ac01cb8c8c8e5bfa8cd54400237), or log wrangler in on this runner."
+            exit 1
+          fi
+          npm run check:live -- "$NEXT_PUBLIC_SITE_URL"
+      - name: Publish run summary
+        if: success()
+        run: echo "Website rebuilt from latest TrueMinutes-releases and deployed from the self-hosted runner." >> "$GITHUB_STEP_SUMMARY"

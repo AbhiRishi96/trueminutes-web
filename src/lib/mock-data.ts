@@ -215,8 +215,8 @@ export const FEATURE_CATALOG = [
         body: "Scheduled prompts at start−30s until Start, Skip, cancel, or verified leave.",
       },
       {
-        title: "Always transcribe this series",
-        body: "Revocable automation that still waits for verified join.",
+        title: "Join island",
+        body: "When call controls are verified, Transcribe or more options appear as an island. It follows fullscreen meeting Spaces with the meeting app icon.",
       },
       {
         title: "Browser audio consent",
@@ -242,7 +242,11 @@ export const FEATURE_CATALOG = [
       },
       {
         title: "Floating recording pill",
-        body: "Live timer, Pause/Include mic, Stop, Open TrueMinutes.",
+        body: "Live timer, waveform, mic include/off, Stop, and Open — stays in fullscreen meeting Spaces with the meeting app icon.",
+      },
+      {
+        title: "Native window chrome",
+        body: "Titlebar and traffic lights stay visible. Green toggles fullscreen; Escape exits.",
       },
       {
         title: "Auto-stop on leave",
@@ -250,11 +254,11 @@ export const FEATURE_CATALOG = [
       },
       {
         title: "Route recovery",
-        body: "Bluetooth and device swaps heal without dropping the session.",
+        body: "Bluetooth and device swaps heal without dropping the session. Capture prefers a built-in device clock for USB, Bluetooth, and external outputs.",
       },
       {
         title: "Saved-audio recovery",
-        body: "If live ASR misses drain, rebuild locally with Retry.",
+        body: "If live ASR misses drain, rebuild locally with Retry. Transient system-audio start failures retry from the menu panel.",
       },
     ],
   },

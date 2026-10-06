@@ -8,6 +8,7 @@ const origin = (process.argv[2] ?? "http://localhost:3011").replace(/\/$/, "");
 const routes = [
   "/",
   "/features/",
+  "/tour/",
   "/privacy/",
   "/download/",
   "/docs/",

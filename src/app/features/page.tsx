@@ -25,7 +25,7 @@ const FEATURES = [
     id: "capture",
     icon: AudioLines,
     title: "Capture the call. Stay in it.",
-    body: "Record on your Mac without adding another participant. A join island appears when call controls are verified; a floating pill keeps mic status and Stop in view.",
+    body: "Record on your Mac without adding another participant. A join island appears when call controls are verified; a floating pill keeps mic status and Stop in view, including fullscreen meeting Spaces.",
     items: [
       "Join island with Transcribe and a dropdown for series rules or Skip",
       "Floating recording pill with timer, mic include/off, and Stop",

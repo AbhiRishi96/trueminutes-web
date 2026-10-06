@@ -1,33 +1,57 @@
 {
   "schema": 2,
   "repository": "AbhiRishi96/TrueMinutes-releases",
-  "releaseId": 403650718,
-  "version": "0.8.8",
-  "tag": "v0.8.8",
-  "publishedAt": "2026-10-05T11:41:06Z",
-  "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.8",
-  "assetId": 612676092,
-  "assetUpdatedAt": "2026-10-05T13:35:04Z",
-  "assetSize": 26493322,
-  "assetDigest": "sha256:76d67e5eadd25e2fd0d1dc0eec3bc30d8259d0816e61281905ccc5735a3ff3cb",
-  "downloadUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/download/v0.8.8/TrueMinutes-0.8.8.dmg",
+  "releaseId": 404675522,
+  "version": "0.8.9",
+  "tag": "v0.8.9",
+  "publishedAt": "2026-10-06T12:22:33Z",
+  "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.9",
+  "assetId": 615442890,
+  "assetUpdatedAt": "2026-10-06T12:22:31Z",
+  "assetSize": 27877045,
+  "assetDigest": "sha256:894477d49e2dd321462187f67eb77f65ace3689d41e87518944a20d79a1fdfc3",
+  "downloadUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/download/v0.8.9/TrueMinutes-0.8.9.dmg",
   "changelog": [
-    "Speaker-off meeting capture uses a Core Audio process tap for native Teams/Zoom and, after the usual per-meeting confirm, for browser Meet/Teams/Zoom, so remote audio is still recorded when Mac speakers are muted or off.",
-    "Menu bar panel sizes to its actions instead of collapsing to a header-only strip, so Open, export, recent meetings, Settings, and Quit stay usable.",
-    "Teams Accessibility scan no longer crashes the app when a meeting UI node is released while TrueMinutes is reading controls."
+    "Native titlebar and traffic lights stay visible, with green-button fullscreen toggling and Escape to exit fullscreen.",
+    "Meeting prompts and the recording pill follow fullscreen meeting Spaces and display the meeting app icon.",
+    "The recording waveform moves more smoothly and stays inside the compact pill.",
+    "Meeting audio capture prefers a built-in device clock when listening through USB, Bluetooth, or external outputs, and discovers browser/Electron audio helpers.",
+    "Transient system-audio startup failures receive bounded retries; failed starts can be retried from the menu panel.",
+    "Recording hold uses sustained meeting-input inactivity as additional hang-up evidence, while retaining browser mute and Accessibility-blackout safeguards.",
+    "Green-button click interception is limited to the actual button and preserves modified clicks."
   ],
   "signing": "internal",
   "notarized": false,
   "history": [
+    {
+      "version": "0.8.9",
+      "tag": "v0.8.9",
+      "publishedAt": "2026-10-06T12:22:33Z",
+      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.9",
+      "changelog": [
+        "Native titlebar and traffic lights stay visible, with green-button fullscreen toggling and Escape to exit fullscreen.",
+        "Meeting prompts and the recording pill follow fullscreen meeting Spaces and display the meeting app icon.",
+        "The recording waveform moves more smoothly and stays inside the compact pill.",
+        "Meeting audio capture prefers a built-in device clock when listening through USB, Bluetooth, or external outputs, and discovers browser/Electron audio helpers.",
+        "Transient system-audio startup failures receive bounded retries; failed starts can be retried from the menu panel.",
+        "Recording hold uses sustained meeting-input inactivity as additional hang-up evidence, while retaining browser mute and Accessibility-blackout safeguards.",
+        "Green-button click interception is limited to the actual button and preserves modified clicks."
+      ]
+    },
     {
       "version": "0.8.8",
       "tag": "v0.8.8",
       "publishedAt": "2026-10-05T11:41:06Z",
       "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.8",
       "changelog": [
+        "Join island is a 280×55 capsule with violet Transcribe, then a countdown chip, a one-line news-ticker headline, and a 5px full-width bottom bar that moves green → amber → red as the timer runs out. The teardrop drop / bounce intro is unchanged.",
+        "Live prompts keep a smooth 15s countdown; the timer chip turns amber at 10s and red at 5s. Calendar prompts show no timer and dismiss manually or one minute after the scheduled start.",
+        "Recording pill keeps the deployed compact→expanded morph; Mic uses a slash/color mute affordance with a fixed “Mic” label.",
+        "Keychain credentials load from one Data Protection vault item after the first migrate, so launch should present at most one Always Allow instead of a prompt per saved key.",
         "Speaker-off meeting capture uses a Core Audio process tap for native Teams/Zoom and, after the usual per-meeting confirm, for browser Meet/Teams/Zoom, so remote audio is still recorded when Mac speakers are muted or off.",
         "Menu bar panel sizes to its actions instead of collapsing to a header-only strip, so Open, export, recent meetings, Settings, and Quit stay usable.",
-        "Teams Accessibility scan no longer crashes the app when a meeting UI node is released while TrueMinutes is reading controls."
+        "Teams Accessibility scan no longer crashes the app when a meeting UI node is released while TrueMinutes is reading controls.",
+        "Internal signing pin follows the active TrueMinutes Internal leaf so local and CI builds verify against the same certificate."
       ]
     },
     {
@@ -65,42 +89,6 @@
       "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.5",
       "changelog": [
         "Build 202610040630. See CHANGELOG.md for details."
-      ]
-    },
-    {
-      "version": "0.8.4",
-      "tag": "v0.8.4",
-      "publishedAt": "2026-10-03T20:43:26Z",
-      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.4",
-      "changelog": [
-        "Build 202610032029. See CHANGELOG.md for details."
-      ]
-    },
-    {
-      "version": "0.8.3",
-      "tag": "v0.8.3",
-      "publishedAt": "2026-10-03T07:55:59Z",
-      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.3",
-      "changelog": [
-        "Build 202610030727. See CHANGELOG.md for details."
-      ]
-    },
-    {
-      "version": "0.8.2",
-      "tag": "v0.8.2",
-      "publishedAt": "2026-10-02T15:54:01Z",
-      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.2",
-      "changelog": [
-        "Build 202610021525. See CHANGELOG.md for details."
-      ]
-    },
-    {
-      "version": "0.8.11",
-      "tag": "v0.8.11",
-      "publishedAt": "2026-09-30T18:06:46Z",
-      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.11",
-      "changelog": [
-        "Build 202609301821. See CHANGELOG.md for details."
       ]
     }
   ]

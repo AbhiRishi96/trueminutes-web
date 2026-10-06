@@ -167,7 +167,7 @@ export default function HomePage() {
             },
             {
               title: "Give it your attention",
-              body: "A floating recording pill keeps timer, mic status, and Stop in view while you stay in the conversation.",
+              body: "A floating recording pill keeps timer, waveform, mic status, and Stop in view — including when you fullscreen the meeting on another Space.",
             },
             {
               title: "Leave with something useful",

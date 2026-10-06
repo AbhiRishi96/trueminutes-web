@@ -34,6 +34,11 @@ const VERIFIED_SIGNING = {
       signing: "internal",
       notarized: false,
     },
+  "615442890:sha256:894477d49e2dd321462187f67eb77f65ace3689d41e87518944a20d79a1fdfc3":
+    {
+      signing: "internal",
+      notarized: false,
+    },
 };
 
 const githubHeaders = {

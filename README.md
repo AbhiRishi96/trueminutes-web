@@ -20,7 +20,7 @@ npm run check:static
 npm audit --audit-level=moderate
 ```
 
-Build writes `out/`. `prepare-static.mjs` excludes the original personal screenshots and checks the public asset boundary. `check:static` validates six pages, internal links, anchors, metadata, sitemap, examples, and 404 output.
+Build writes `out/`. `prepare-static.mjs` excludes the original personal screenshots and checks the public asset boundary. `check:static` validates the public pages, internal links, anchors, metadata, sitemap, examples, and 404 output.
 
 To preview the actual static export, including Cloudflare headers:
 
@@ -57,13 +57,20 @@ Verify the deployed pages, HTTP 404, assets, headers, official download, and the
 
 ## Automatic release updates
 
-`.github/workflows/deploy-website.yml` checks the published app release at minutes 17 and 47 each hour. Changed releases or replacement DMGs trigger a verified rebuild, deployment, and live check. Unchanged scheduled runs skip installation/build/deployment. Pushes to `main` and manual runs also deploy website changes. Optional `repository_dispatch` event `trueminutes-release` supports a future publisher-side trigger without changing the website workflow. There is no native release-pipeline dependency or new OAuth/backend service.
+Production deploys run on the **TrueMinutes self-hosted macOS runner** (`trueminutes`, labels `self-hosted` + `macOS`) from private repo `AbhiRishi96/TrueMinutes`, workflow **Sync marketing website**. That job checks out this public website repo, rebuilds `release.json` from `AbhiRishi96/TrueMinutes-releases`, and deploys Worker `trueminutes-website` only.
 
-One-time setup: add the repository Actions secret `CLOUDFLARE_API_TOKEN` with only the required Workers deployment permission on account `2f4f5ac01cb8c8c8e5bfa8cd54400237`. Never copy Wrangler's local OAuth token into GitHub, commit a credential, or add it to public environment variables. The workflow fails explicitly if deployment is needed and this secret is missing. See [Cloudflare's documented setup](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/).
+It starts when:
 
-GitHub schedules can be delayed and public-repository schedules are disabled after 60 days without repository activity. Check Actions for failures/disabled schedules; this is polling, not an immediate release webhook. See [GitHub's schedule behavior](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule). The previous deployed site stays available if verification/build/deployment fails.
+- **Release Sparkle update** on TrueMinutes succeeds (`workflow_run`)
+- A GitHub Release is published or edited on TrueMinutes-releases (optional `WEBSITE_SYNC_TOKEN` dispatch)
+- Twice-hourly schedule on TrueMinutes
+- Manual **workflow_dispatch** on TrueMinutes
 
-Signing evidence is bound to the exact known 0.8.4 asset ID and digest in `scripts/release-contract.mjs`. New or replaced assets default to “not verified” and release-specific install guidance; they never inherit an old signing/notarization claim. This automation verifies GitHub artifact integrity, not Apple notarization or native app behavior.
+Canonical workflow files live in `docs/ci/`. GitHub-hosted Actions on this public repo stay as a fallback and **skip deploy** unless `CLOUDFLARE_API_TOKEN` is set here. Prefer adding that token on **TrueMinutes** (not this public repo) so the self-hosted runner can deploy. Never copy Wrangler's local OAuth token into GitHub or commit a credential.
+
+GitHub personal-account runners are per-repository. The existing `trueminutes` runner is registered on TrueMinutes, so website production CI lives there instead of registering a second runner on this repo.
+
+Signing evidence is bound to exact known asset ID and digest pairs in `scripts/release-contract.mjs`. New or replaced assets default to “not verified” and release-specific install guidance; they never inherit an old signing/notarization claim. This automation verifies GitHub artifact integrity, not Apple notarization or native app behavior.
 
 Commands:
 
@@ -89,4 +96,4 @@ Use an HTTPS origin without a path. This updates canonicals, sitemap, robots, Op
 
 ## Routes
 
-`/`, `/features/`, `/download/`, `/docs/`, `/privacy/`, `/faq/`, `/robots.txt`, `/sitemap.xml`, and a custom 404 page.
+`/`, `/features/`, `/tour/`, `/download/`, `/docs/`, `/privacy/`, `/faq/`, `/robots.txt`, `/sitemap.xml`, and a custom 404 page.

@@ -20,8 +20,8 @@ const mono = JetBrains_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#07070a",
-  colorScheme: "dark",
+  themeColor: "#f5f5f7",
+  colorScheme: "light dark",
 };
 
 export const metadata: Metadata = {

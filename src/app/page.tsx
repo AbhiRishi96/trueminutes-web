@@ -43,7 +43,7 @@ const QUESTIONS = [
 export default function HomePage() {
   return (
     <>
-      <section className="home-hero">
+      <section className="home-hero apple-hero">
         <div className="hero-copy">
           <Link className="release-pill" href="/download">
             <span className="release-dot" />
@@ -79,6 +79,24 @@ export default function HomePage() {
           <ProductDemo />
         </div>
       </section>
+      <section className="release-feature" aria-labelledby="release-feature-title">
+        <div className="release-feature-copy">
+          <p className="eyebrow">NEW IN TRUEMINUTES {SITE.version}</p>
+          <h2 id="release-feature-title">
+            The details stay clear.
+            <br /><span>The work finds its place.</span>
+          </h2>
+          <p>Recent updates make the whole meeting loop feel more considered: from recognizing speech and speakers to recovering a transcript and organizing what comes next.</p>
+          <Link className="text-link" href="/download#changelog">Explore the latest release <ArrowRight size={15} /></Link>
+        </div>
+        <div className="release-feature-grid">
+          {[
+            { n: "01", title: "A library that learns its shape", body: "Meeting titles and transcript content help recordings find the right category, with new meetings kept alongside related work." },
+            { n: "02", title: "See what the audio is doing", body: "The expanded recording pill shows separate mic and meeting levels, transcript freshness, speaker activity, and capture health." },
+            { n: "03", title: "Pick up where speech dropped", body: "Recovery checks transcript coverage against saved audio. Speaker labels can be corrected, with local audio-backed feedback." },
+          ].map((item) => <article key={item.n}><span>{item.n}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></article>)}
+        </div>
+      </section>
       <section className="platform-section" aria-label="Meeting platforms">
         <p>For the conversations you already have</p>
         <div>
@@ -95,6 +113,7 @@ export default function HomePage() {
         </small>
       </section>
       <Section
+        className="home-editorial-section"
         eyebrow="LESS RECONSTRUCTING. MORE DOING."
         title={
           <>
@@ -185,6 +204,7 @@ export default function HomePage() {
         </ol>
       </section>
       <Section
+        className="home-editorial-section home-editorial-dark"
         id="overlays"
         eyebrow="AROUND THE CALL"
         title="Join island. Recording pill. Always in reach."
@@ -193,6 +213,7 @@ export default function HomePage() {
         <MeetingChromeDemo />
       </Section>
       <Section
+        className="home-editorial-section home-editorial-light"
         id="ask"
         eyebrow="YOUR CONVERSATIONS, CONNECTED"
         title="“What did we decide last time?”"
@@ -201,6 +222,7 @@ export default function HomePage() {
         <AskDemo />
       </Section>
       <Section
+        className="home-editorial-section home-editorial-dark"
         id="sync"
         eyebrow="OPTIONAL GOOGLE CONNECTIONS"
         title="Sign in once. Sync the memory you choose."

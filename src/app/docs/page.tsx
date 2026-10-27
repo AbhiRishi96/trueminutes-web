@@ -241,7 +241,7 @@ export default function DocsPage() {
             <ul className="flex flex-col gap-3 text-xs text-muted">
               {SECTIONS.map((s) => (
                 <li key={s.id}>
-                  <a href={`#${s.id}`} className="hover:text-white">
+                  <a href={`#${s.id}`} className="hover:text-text">
                     {s.title}
                   </a>
                 </li>

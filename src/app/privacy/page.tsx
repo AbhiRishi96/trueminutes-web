@@ -121,7 +121,7 @@ export default function PrivacyPage() {
             <h2 className="text-xl font-medium">Important boundaries</h2>
             <ul className="mt-5 space-y-4 text-sm leading-7 text-muted">
               <li>
-                <strong className="font-medium text-white">
+                <strong className="font-medium text-text">
                   Browser capture can include other tabs.
                 </strong>{" "}
                 Audio is scoped to the selected browser application, not an
@@ -129,14 +129,14 @@ export default function PrivacyPage() {
                 meeting application. Exact-tab capture is not currently offered.
               </li>
               <li>
-                <strong className="font-medium text-white">
+                <strong className="font-medium text-text">
                   Local storage is not application-encrypted.
                 </strong>{" "}
                 Audio files and the meeting database rely on your Mac’s access
                 controls. Use FileVault and a secure user account.
               </li>
               <li>
-                <strong className="font-medium text-white">
+                <strong className="font-medium text-text">
                   Disconnecting is different from deleting.
                 </strong>{" "}
                 Turning off sync stops future transfers. It does not
@@ -144,7 +144,7 @@ export default function PrivacyPage() {
                 also be revoked from your Google Account.
               </li>
               <li>
-                <strong className="font-medium text-white">
+                <strong className="font-medium text-text">
                   Record with consent.
                 </strong>{" "}
                 Inform participants and follow your organization’s policies and
@@ -165,7 +165,7 @@ export default function PrivacyPage() {
               the{" "}
               <a
                 href={SITE.privacyPolicy}
-                className="text-violet-200 underline underline-offset-4"
+                className="text-signal underline underline-offset-4"
                 target="_blank"
                 rel="noopener noreferrer"
               >

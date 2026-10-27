@@ -50,7 +50,7 @@ export default function DownloadPage() {
           </p>
           <a
             href={SITE.dmg}
-            className="mt-7 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-lg bg-white px-5 py-3 text-sm font-semibold text-black hover:bg-violet-100"
+            className="mt-7 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#0071e3] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0077ed]"
           >
             <ArrowDownToLine size={17} />
             Download v{SITE.version} (.dmg)
@@ -154,7 +154,7 @@ export default function DownloadPage() {
           Older releases remain on{" "}
           <a
             href={`${SITE.releasesRepo}/releases`}
-            className="underline underline-offset-4 hover:text-white"
+            className="underline underline-offset-4 hover:text-text"
             target="_blank"
             rel="noopener noreferrer"
           >

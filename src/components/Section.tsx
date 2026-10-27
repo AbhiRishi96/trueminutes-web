@@ -25,13 +25,13 @@ export function Section({
       id={id}
       className={`mx-auto max-w-6xl px-5 py-16 sm:py-24 ${className}`}
     >
-      <div className={`mb-8 sm:mb-10 ${alignCls}`}>
+      <div className={`story-heading mb-8 sm:mb-10 ${alignCls}`}>
         {eyebrow && (
-          <p className="mb-3 text-[12px] font-medium tracking-[0.06em] text-violet-200 uppercase">
+          <p className="mb-3 text-[12px] font-medium tracking-[0.06em] text-signal uppercase">
             {eyebrow}
           </p>
         )}
-        <h2 className="text-balance text-[1.75rem] leading-[1.15] font-semibold tracking-[var(--tracking-display)] text-white sm:text-[2.6rem] sm:leading-[1.15]">
+        <h2 className="text-balance text-[1.75rem] leading-[1.15] font-semibold tracking-[var(--tracking-display)] text-text sm:text-[2.6rem] sm:leading-[1.15]">
           {title}
         </h2>
         {description && (
@@ -55,14 +55,14 @@ export function PageHero({
   description?: React.ReactNode;
 }) {
   return (
-    <div className="relative mx-auto max-w-2xl overflow-hidden px-5 pb-10 pt-16 text-center sm:pt-24">
+    <div className="page-hero relative mx-auto max-w-3xl overflow-hidden px-5 pb-10 pt-14 text-center sm:pb-14 sm:pt-20">
       <div className="page-hero-glow" aria-hidden />
       {eyebrow && (
         <p className="relative mb-3 text-[12px] font-medium tracking-[0.06em] text-dim uppercase">
           {eyebrow}
         </p>
       )}
-      <h1 className="relative text-balance text-[2.4rem] leading-[1.12] font-semibold tracking-[var(--tracking-display)] text-white sm:text-[3rem] sm:leading-[1.1]">
+      <h1 className="relative text-balance text-[2.6rem] leading-[1.08] font-semibold tracking-[var(--tracking-display)] text-text sm:text-[3.5rem] sm:leading-[1.04]">
         {title}
       </h1>
       {description && (

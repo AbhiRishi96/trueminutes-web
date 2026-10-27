@@ -1,41 +1,82 @@
 {
   "schema": 2,
   "repository": "AbhiRishi96/TrueMinutes-releases",
-  "releaseId": 404675522,
-  "version": "0.8.9",
-  "tag": "v0.8.9",
-  "publishedAt": "2026-10-06T12:22:33Z",
-  "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.9",
-  "assetId": 615442890,
-  "assetUpdatedAt": "2026-10-06T12:22:31Z",
-  "assetSize": 27877045,
-  "assetDigest": "sha256:894477d49e2dd321462187f67eb77f65ace3689d41e87518944a20d79a1fdfc3",
-  "downloadUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/download/v0.8.9/TrueMinutes-0.8.9.dmg",
+  "releaseId": 425094375,
+  "version": "0.9.02",
+  "tag": "v0.9.02",
+  "publishedAt": "2026-10-27T06:19:21Z",
+  "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.9.02",
+  "assetId": 680663264,
+  "assetUpdatedAt": "2026-10-27T06:19:20Z",
+  "assetSize": 59918796,
+  "assetDigest": "sha256:7fe778df68f774f9959f50c527c83386c031bfab52d97cd3c5e748250fc997d2",
+  "downloadUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/download/v0.9.02/TrueMinutes-0.9.02.dmg",
   "changelog": [
-    "Native titlebar and traffic lights stay visible, with green-button fullscreen toggling and Escape to exit fullscreen.",
-    "Meeting prompts and the recording pill follow fullscreen meeting Spaces and display the meeting app icon.",
-    "The recording waveform moves more smoothly and stays inside the compact pill.",
-    "Meeting audio capture prefers a built-in device clock when listening through USB, Bluetooth, or external outputs, and discovers browser/Electron audio helpers.",
-    "Transient system-audio startup failures receive bounded retries; failed starts can be retried from the menu panel.",
-    "Recording hold uses sustained meeting-input inactivity as additional hang-up evidence, while retaining browser mute and Accessibility-blackout safeguards.",
-    "Green-button click interception is limited to the actual button and preserves modified clicks."
+    "Meeting organization groups recordings using their titles and transcript content, then keeps new meetings with the matching category.",
+    "Recording status makes microphone and meeting-audio activity visible in the expanded status pill, with live source levels and transcript updates.",
+    "Meeting controls use a more consistent layout across meeting detail and list views, with smoother recording and meeting prompts.",
+    "Capture reliability retains microphone capture through transient Slack accessibility gaps and improves meeting evidence selection across browser windows.",
+    "Live transcription follows newly recognized speech and improves speaker and audio-source activity feedback."
   ],
-  "signing": "internal",
-  "notarized": false,
+  "signing": "unknown",
+  "notarized": null,
   "history": [
+    {
+      "version": "0.9.02",
+      "tag": "v0.9.02",
+      "publishedAt": "2026-10-27T06:19:21Z",
+      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.9.02",
+      "changelog": [
+        "Meeting organization groups recordings using their titles and transcript content, then keeps new meetings with the matching category.",
+        "Recording status makes microphone and meeting-audio activity visible in the expanded status pill, with live source levels and transcript updates.",
+        "Meeting controls use a more consistent layout across meeting detail and list views, with smoother recording and meeting prompts.",
+        "Capture reliability retains microphone capture through transient Slack accessibility gaps and improves meeting evidence selection across browser windows.",
+        "Live transcription follows newly recognized speech and improves speaker and audio-source activity feedback."
+      ]
+    },
+    {
+      "version": "0.9.01",
+      "tag": "v0.9.01",
+      "publishedAt": "2026-10-24T20:17:56Z",
+      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.9.01",
+      "changelog": [
+        "Transcript recovery checks saved audio against transcript coverage and targets uncovered trailing audio, reducing unnecessary full-recording retries after a short capture gap.",
+        "Speaker separation assigns generic speaker labels using the saved microphone and meeting-audio tracks, with manual speaker correction when a label needs fixing.",
+        "Transcript corrections can be tied to matching source-track audio and retained locally; opt-in vocabulary learning supplies hints to later transcription.",
+        "Recording reliability preserves captured audio when live captions are unavailable and continues with post-recording transcription.",
+        "Speech settings add configurable final processing models and clearer transcript recovery controls."
+      ]
+    },
+    {
+      "version": "0.9.0",
+      "tag": "v0.9.0",
+      "publishedAt": "2026-10-20T12:36:19Z",
+      "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.9.0",
+      "changelog": [
+        "Live English captions for paid-product meetings: native streaming speech recognition with realtime English display, typewriter turns, and cleaner punctuation/paragraphs.",
+        "Appearance themes: Slack-inspired BrandAccent palettes in Settings, with a clearer General layout.",
+        "Recording pill waveform: editable color, height, and vertical orientation with live preview.",
+        "Meet / Edge PWA reliability: active-call detection for Chromium Meet PWAs, FloatingPill mic sync restored, and auto-quit on real hang-up without breaking transcription.",
+        "Native speech router and route manifest for streaming ASR engines (Apple streaming, Whisper, sidecars, and managed challenger routes).",
+        "EnglishCaptionController path for high-quality English realtime captions; source language remains locked except for language ID.",
+        "Live transcript typewriter rows, soft-join of micro-finals, and punctuation applied once per turn (avoids one-word “Take./A./T.” fragments).",
+        "Phrase memory from right-click transcript edits so corrections stick across the session."
+      ]
+    },
     {
       "version": "0.8.9",
       "tag": "v0.8.9",
       "publishedAt": "2026-10-06T12:22:33Z",
       "releaseUrl": "https://github.com/AbhiRishi96/TrueMinutes-releases/releases/tag/v0.8.9",
       "changelog": [
+        "Browser meetings retain recording through tab switches and hidden controls while the meeting host remains running without hang-up evidence.",
+        "Installed meeting web apps receive better background Accessibility detection.",
+        "Live Whisper transcription retains more quiet and accented speech, with longer default chunks and improved decode recovery.",
         "Native titlebar and traffic lights stay visible, with green-button fullscreen toggling and Escape to exit fullscreen.",
         "Meeting prompts and the recording pill follow fullscreen meeting Spaces and display the meeting app icon.",
         "The recording waveform moves more smoothly and stays inside the compact pill.",
         "Meeting audio capture prefers a built-in device clock when listening through USB, Bluetooth, or external outputs, and discovers browser/Electron audio helpers.",
-        "Transient system-audio startup failures receive bounded retries; failed starts can be retried from the menu panel.",
-        "Recording hold uses sustained meeting-input inactivity as additional hang-up evidence, while retaining browser mute and Accessibility-blackout safeguards.",
-        "Green-button click interception is limited to the actual button and preserves modified clicks."
+        "Transient system-audio startup failures receive bounded retries; failed starts can be retried from the menu panel."
       ]
     },
     {

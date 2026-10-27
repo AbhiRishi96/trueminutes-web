@@ -7,6 +7,8 @@ import {
   MicOff,
   Square,
   X,
+  CheckCircle2,
+  ExternalLink,
 } from "lucide-react";
 
 type Phase = "join" | "menu" | "recording" | "expanded";
@@ -28,13 +30,13 @@ const PHASES: { id: Phase; label: string; caption: string }[] = [
     id: "recording",
     label: "Recording pill",
     caption:
-      "While capturing, a floating pill shows the timer and mic status. Stay in the call — controls stay on top.",
+      "The compact pill keeps the meeting icon, recording state, live waveform, elapsed time, and mic control in view.",
   },
   {
     id: "expanded",
     label: "Mic & stop",
     caption:
-      "Expand for Mic on/off and Stop. Mic follows verified mute by default; you can include your voice when you want.",
+      "Expand to see mic and meeting levels, transcript freshness, speaker activity, capture health, and Stop or Open controls.",
   },
 ];
 
@@ -46,15 +48,25 @@ function formatTimer(seconds: number) {
 
 /** Illustrative join island + floating recording/mic pill — fictional UI, no live capture. */
 export function MeetingChromeDemo({ className = "" }: { className?: string }) {
-  const [phase, setPhase] = useState<Phase>("join");
+  const [phase, setPhase] = useState<Phase>("expanded");
   const [seconds, setSeconds] = useState(94);
   const [micOn, setMicOn] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [levels, setLevels] = useState([0.28, 0.64, 0.42, 0.88, 0.52, 0.34, 0.72]);
   const active = PHASES.find((p) => p.id === phase) ?? PHASES[0];
 
   useEffect(() => {
     if (phase !== "recording" && phase !== "expanded") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = window.setInterval(() => setSeconds((s) => s + 1), 1000);
+    return () => window.clearInterval(id);
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase !== "recording" && phase !== "expanded") return;
+    const id = window.setInterval(() => {
+      setLevels((current) => current.map(() => 0.18 + Math.random() * 0.78));
+    }, 180);
     return () => window.clearInterval(id);
   }, [phase]);
 
@@ -66,7 +78,7 @@ export function MeetingChromeDemo({ className = "" }: { className?: string }) {
     <div className={`chrome-demo ${className}`}>
       <div
         className="chrome-demo-stage"
-        role="img"
+        role="group"
         aria-label={`Example ${active.label} overlay`}
       >
         <div className="chrome-demo-desktop">
@@ -146,49 +158,57 @@ export function MeetingChromeDemo({ className = "" }: { className?: string }) {
           )}
 
           {(phase === "recording" || phase === "expanded") && (
-            <div
-              className={`chrome-rec-pill ${phase === "expanded" ? "is-expanded" : ""}`}
-            >
-              <button
-                type="button"
-                className="chrome-rec-compact"
-                aria-expanded={phase === "expanded"}
-                aria-label={
-                  phase === "expanded"
-                    ? "Collapse recording controls"
-                    : "Expand recording controls"
-                }
-                onClick={() =>
-                  setPhase(phase === "expanded" ? "recording" : "expanded")
-                }
-              >
-                <span className="chrome-rec-dot" aria-hidden />
-                <span className="chrome-rec-wave" aria-hidden>
-                  <i />
-                  <i />
-                  <i />
-                  <i />
-                </span>
-                <span className="chrome-rec-timer">{formatTimer(seconds)}</span>
-                <span
+            <div className={`chrome-rec-pill ${phase === "expanded" ? "is-expanded" : ""}`}>
+              <div className="chrome-rec-pod">
+                <button
+                  type="button"
+                  className="chrome-rec-compact-hit"
+                  aria-expanded={phase === "expanded"}
+                  aria-label={phase === "expanded" ? "Collapse recording details" : "Expand recording details"}
+                  onClick={() => setPhase(phase === "expanded" ? "recording" : "expanded")}
+                >
+                  <span className="chrome-rec-dot" aria-hidden />
+                  <span className="chrome-rec-wave" aria-hidden>
+                    {levels.map((level, index) => (
+                      <i key={index} style={{ "--level": level } as React.CSSProperties} />
+                    ))}
+                  </span>
+                  <span className="chrome-rec-timer">{formatTimer(seconds)}</span>
+                </button>
+                <button
+                  type="button"
                   className={`chrome-rec-mic-badge ${micOn ? "is-on" : ""}`}
-                  aria-hidden
+                  aria-label={micOn ? "Pause microphone" : "Turn microphone on"}
+                  aria-pressed={micOn}
+                  onClick={() => setMicOn((v) => !v)}
                 >
                   {micOn ? <Mic size={12} /> : <MicOff size={12} />}
-                </span>
-              </button>
+                </button>
+              </div>
               {phase === "expanded" && (
                 <div className="chrome-rec-expanded">
-                  <p className="chrome-rec-title">Weekly product sync</p>
+                  <div className="chrome-rec-card-head">
+                    <span className="chrome-demo-app-icon">M</span>
+                    <div><strong>Recording details</strong><small>Weekly product sync · {formatTimer(seconds)}</small></div>
+                    <span className="chrome-rec-state"><i /> REC</span>
+                  </div>
+                  <div className="chrome-rec-section">
+                    <div className="chrome-rec-section-title"><span>Audio sources</span><b>{micOn ? "Both receiving audio" : "Meeting audio received"}</b></div>
+                    <div className={`chrome-rec-source ${micOn ? "" : "is-muted"}`}>
+                      <span>Mic <button type="button" aria-label={micOn ? "Pause microphone" : "Turn microphone on"} aria-pressed={micOn} onClick={() => setMicOn((v) => !v)}>{micOn ? <Mic size={11} /> : <MicOff size={11} />}</button></span>
+                      <i><i style={{ width: micOn ? `${Math.max(6, Math.round(levels[2] * 100))}%` : "0%" }} /></i><small>{micOn ? "Good" : "Off"}</small>
+                    </div>
+                    <div className="chrome-rec-source"><span>Meeting</span><i><i style={{ width: `${Math.round(levels[4] * 100)}%` }} /></i><small>Good</small></div>
+                  </div>
+                  <div className="chrome-rec-section">
+                    <div className="chrome-rec-section-title"><span>Transcript</span><b>Up to date</b></div>
+                    <p className="chrome-rec-transcript">“Let’s move the review to Thursday, then share the updated plan…”</p>
+                    <small className="chrome-rec-updated">Updated just now · fictional preview</small>
+                  </div>
+                  <div className="chrome-rec-section chrome-rec-speaker"><span>Speaker activity</span><b><i>2</i> Speaker 2 <small>active</small></b></div>
+                  <div className="chrome-rec-health"><CheckCircle2 size={14} /><span>Audio capture looks healthy</span><b>No gaps</b></div>
                   <div className="chrome-rec-controls">
-                    <button
-                      type="button"
-                      onClick={() => setMicOn((v) => !v)}
-                      aria-pressed={micOn}
-                    >
-                      {micOn ? <Mic size={14} /> : <MicOff size={14} />}
-                      {micOn ? "Mic on" : "Mic off"}
-                    </button>
+                    <button type="button" className="chrome-rec-open" onClick={() => setPhase("recording")}><ExternalLink size={12} /> Open</button>
                     <button
                       type="button"
                       className="is-stop"
@@ -228,7 +248,7 @@ export function MeetingChromeDemo({ className = "" }: { className?: string }) {
             </button>
           ))}
         </div>
-        <p>{active.caption}</p>
+        <p aria-live="polite">{active.caption}</p>
         <span>Illustrative preview · Fictional data · No microphone access</span>
       </div>
     </div>

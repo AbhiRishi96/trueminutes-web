@@ -16,7 +16,7 @@ export function Footer() {
               height={28}
               className="rounded-[5px]"
             />
-            <span className="text-[15px] font-semibold text-white">
+            <span className="text-[15px] font-semibold text-text">
               {SITE.name}
             </span>
           </div>
@@ -36,7 +36,7 @@ export function Footer() {
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-muted no-underline transition-colors hover:text-white"
+                    className="text-muted no-underline transition-colors hover:text-text"
                   >
                     {l.label}
                   </Link>
@@ -52,7 +52,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/download"
-                  className="text-muted no-underline transition-colors hover:text-white"
+                  className="text-muted no-underline transition-colors hover:text-text"
                 >
                   Download
                 </Link>
@@ -60,7 +60,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/download#changelog"
-                  className="text-muted no-underline transition-colors hover:text-white"
+                  className="text-muted no-underline transition-colors hover:text-text"
                 >
                   Changelog
                 </Link>
@@ -68,7 +68,7 @@ export function Footer() {
               <li>
                 <a
                   href={SITE.releases}
-                  className="text-muted no-underline transition-colors hover:text-white"
+                  className="text-muted no-underline transition-colors hover:text-text"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -78,7 +78,7 @@ export function Footer() {
               <li>
                 <a
                   href={SITE.privacyPolicy}
-                  className="text-muted no-underline transition-colors hover:text-white"
+                  className="text-muted no-underline transition-colors hover:text-text"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

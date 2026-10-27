@@ -29,6 +29,7 @@ const FEATURES = [
     items: [
       "Join island with Transcribe and a dropdown for series rules or Skip",
       "Floating recording pill with timer, mic include/off, and Stop",
+      "Expanded view with separate audio levels, transcript freshness, speaker activity, and capture health",
       "App-scoped audio and a separate microphone track",
       "Microphone follows verified mute state by default",
       "Revocable rules for recurring meeting series",
@@ -116,7 +117,7 @@ export default function FeaturesPage() {
             <a
               key={f.id}
               href={`#${f.id}`}
-              className="rounded-full border border-border px-4 py-2 hover:text-white"
+              className="rounded-full border border-border px-4 py-2 hover:text-text"
             >
               {f.id === "notes"
                 ? "Meeting notes"

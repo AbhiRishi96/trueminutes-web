@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/site";
 import { DownloadButton } from "@/components/DownloadButton";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -68,7 +69,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 transition-[background-color,border-color] duration-200 ${
+      className={`site-nav sticky top-0 z-50 transition-[background-color,border-color] duration-200 ${
         scrolled || open ? "glass" : "bg-transparent"
       }`}
     >
@@ -81,7 +82,7 @@ export function Navbar() {
             height={28}
             className="rounded-[5px]"
           />
-          <span className="text-[15px] font-semibold tracking-tight text-white">
+          <span className="text-[15px] font-semibold tracking-tight text-text">
             {SITE.name}
           </span>
         </Link>
@@ -95,7 +96,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={`text-[13px] no-underline transition-colors ${
-                  active ? "text-white" : "text-muted hover:text-white"
+                  active ? "text-text" : "text-muted hover:text-text"
                 }`}
                 aria-current={active ? "page" : undefined}
               >
@@ -103,6 +104,7 @@ export function Navbar() {
               </Link>
             );
           })}
+          <ThemeToggle />
         </nav>
 
         <div className="flex items-center gap-2">
@@ -110,7 +112,7 @@ export function Navbar() {
           <button
             ref={menuRef}
             type="button"
-            className="inline-flex rounded-md p-2 text-muted transition-colors hover:text-white md:hidden"
+            className="inline-flex rounded-md p-2 text-muted transition-colors hover:text-text md:hidden"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             aria-controls="mobile-nav"
@@ -126,7 +128,7 @@ export function Navbar() {
           ref={navRef}
           aria-label="Mobile navigation"
           id="mobile-nav"
-          className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto border-t border-border bg-canvas md:hidden"
+          className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto border-t border-border bg-white text-text md:hidden"
         >
           <div className="mx-auto flex max-w-5xl flex-col gap-1 px-5 py-6">
             {NAV_LINKS.map((link) => {
@@ -139,8 +141,8 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   className={`rounded-lg px-3 py-3 text-[16px] no-underline ${
                     active
-                      ? "bg-white/[0.04] text-white"
-                      : "text-muted hover:text-white"
+                      ? "bg-black/[0.04] text-text"
+                      : "text-muted hover:text-text"
                   }`}
                   aria-current={active ? "page" : undefined}
                 >
@@ -151,10 +153,11 @@ export function Navbar() {
             <Link
               href="/download"
               onClick={() => setOpen(false)}
-              className="rounded-lg px-3 py-3 text-[16px] text-muted no-underline hover:text-white"
+              className="rounded-lg px-3 py-3 text-[16px] text-muted no-underline hover:text-text"
             >
               Install guide
             </Link>
+            <div className="px-3 py-2"><ThemeToggle /></div>
             <div className="mt-4 px-3">
               <DownloadButton variant="primary" />
             </div>

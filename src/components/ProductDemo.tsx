@@ -113,7 +113,9 @@ export function ProductDemo({ className = "" }: { className?: string }) {
           <span>TrueMinutes — {tab.label}</span>
           <span className="demo-example-label">Interactive example</span>
         </div>
-        <ProductPreview key={tab.id} view={tab.id} interactive />
+        <div className="product-scene" key={tab.id}>
+          <ProductPreview view={tab.id} interactive />
+        </div>
       </div>
       <div className="demo-caption">
         <p>{tab.description}</p>
